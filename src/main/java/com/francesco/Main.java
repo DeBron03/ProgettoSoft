@@ -7,5 +7,8 @@ public class Main {
         System.out.println("Miaoooyygygoo");//daje
         System.out.println("Modifica test2");//daje
         System.out.println("Modifica test3");//catello
+                System.out.println("Miao");//daje
+                System.out.println("Miaoooyygygoo");//daje
+                System.out.println("Modifica test2");//daje
     }
 }
