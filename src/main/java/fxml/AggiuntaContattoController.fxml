@@ -6,6 +6,63 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AggiuntaContattoControllerController">
-    
-</AnchorPane>
+<SplitPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AggiuntaContattoControllerController">
+    <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="645.0" prefWidth="709.0">
+         <children>
+            <VBox layoutX="10.0" layoutY="20.0" prefHeight="687.0" prefWidth="724.0" spacing="15.0" AnchorPane.bottomAnchor="291.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="150.0" prefWidth="390.0">
+                           <children>
+                              <Label alignment="TOP_RIGHT" text="Nome" />
+                              <TextField fx:id="nameField" alignment="TOP_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="39.0" prefWidth="385.0" />
+                              <Label text="Cognome" />
+                              <TextField fx:id="surnameField" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Compleanno" />
+                        <TextField fx:id="birthdayField" />
+                        <Label text="Società" />
+                        <TextField fx:id="companyField" prefHeight="39.0" prefWidth="120.0" />
+                        <Label text="Numeri di telefono (+39)" />
+                        <TextField fx:id="numberField1" prefHeight="39.0" prefWidth="277.0" />
+                        <TextField fx:id="numberField2" />
+                        <TextField fx:id="numberField3" />
+                        <Label text="E-Mail" />
+                        <TextField fx:id="emailField1" />
+                        <TextField fx:id="emailField2" layoutX="10.0" layoutY="313.0" />
+                        <TextField fx:id="emailField3" layoutX="10.0" layoutY="313.0" />
+                        <Label text="Indirizzo" />
+                        <TextField fx:id="addressField" />
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER" prefHeight="30.0" prefWidth="724.0" spacing="15.0">
+                     <children>
+                        <Button fx:id="addButton" mnemonicParsing="false" onAction="" text="Aggiungi" />
+                        <Button fx:id="delButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="" text="Annulla" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <TableView fx:id="rubrica" editable="true" layoutX="159.0" layoutY="199.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+              <columns>
+                <TableColumn fx:id="nameClm" prefWidth="75.0" text="Nome" />
+                <TableColumn fx:id="surnameClm" prefWidth="150.0" text="Cognome" />
+                  <TableColumn fx:id="numberClm" prefWidth="150.0" text="Numero di telefono" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children></AnchorPane>
+  </items>
+</SplitPane>
