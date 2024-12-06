@@ -50,6 +50,8 @@ public class VisualizzaSingoloContattoController implements Initializable {
     @FXML
     private Button deleteButton;
     @FXML
+    private Button returnButton;
+    @FXML
     private ObservableList<Contatto> Contacts;
     
     @Override

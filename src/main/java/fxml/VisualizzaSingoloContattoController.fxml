@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VisualizzaSingoloContattoController">
+<AnchorPane id="AnchorPane" prefHeight="590.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.VisualizzaSingoloContattoController">
      <children>
       <VBox layoutX="-3.0" layoutY="-2.0" prefHeight="500.0" prefWidth="599.0">
          <children>
@@ -20,6 +22,16 @@
                         <Label fx:id="surnameContent" prefHeight="60.0" prefWidth="294.0" text="Cognome" />
                      </children>
                   </VBox>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+                  <Button fx:id="returnButton" mnemonicParsing="false" text="X">
+                     <HBox.margin>
+                        <Insets left="85.0" top="2.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
             </HBox>
             <VBox prefHeight="350.0" prefWidth="618.0">
