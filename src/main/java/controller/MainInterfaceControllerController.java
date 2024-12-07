@@ -46,7 +46,7 @@ public class MainInterfaceControllerController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+       
     } 
     @FXML
      public void esportaContatto(){
