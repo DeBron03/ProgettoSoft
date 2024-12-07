@@ -9,17 +9,22 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import data.*;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+
+
 /**
  * FXML Controller class
  *
  * @author lucac
  */
-public class ModificaContattoControllerController implements Initializable {
+public class AggiuntaContattoController implements Initializable {
 
     @FXML
     private TextField nameField;
@@ -44,23 +49,24 @@ public class ModificaContattoControllerController implements Initializable {
     @FXML
     private TextField adressField;
     @FXML
-    private Button saveButton;
+    private Button addButton;
     @FXML
     private Button delButton;
-     @FXML
+    @FXML
     private ObservableList<Contatto> Contacts;
-     
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    @FXML
     
-    @FXML
-    public void annulla(){
+    public void aggiungiContatto(Contatto c) {
         
     }
-    @FXML
-    public void modificaContatto(){
-        
-    }
+     @FXML
+   public void annulla() {
+       
+}
+
 }

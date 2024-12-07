@@ -9,8 +9,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import data.*;
-import javafx.fxml.FXML;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -18,55 +18,58 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-
 /**
  * FXML Controller class
  *
  * @author lucac
  */
-public class AggiuntaContattoControllerController implements Initializable {
-
+public class MainInterfacerController implements Initializable {
+    private Rubrica contatti=new Rubrica();
+    
     @FXML
-    private TextField nameField;
+    private TextField researchField;
     @FXML
-    private TextField surnameField;
+   
+    private Button addContact;
     @FXML
-    private DatePicker birthdayField;
+    private Button exportContact;
     @FXML
-    private TextField companyField;
+     private Button importContact;
     @FXML
-    private TextField numberField1;
+    private TableView<Contatto> rubrica;
     @FXML
-    private TextField numberField2;
+    private TableColumn<Contatto, String> nameClm;
     @FXML
-    private TextField numberField3;
-    @FXML
-    private TextField emailField1;
-    @FXML
-    private TextField emailField2;
-    @FXML
-    private TextField emailField3;
-    @FXML
-    private TextField adressField;
-    @FXML
-    private Button addButton;
-    @FXML
-    private Button delButton;
+    private TableColumn<Contatto, String> surnameClm;
     @FXML
     private ObservableList<Contatto> Contacts;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+       
+    } 
     @FXML
-    
-    public void aggiungiContatto(Contatto c) {
+     public void esportaContatto(){
         
     }
      @FXML
-   public void annulla() {
-       
-}
-
+    public void importaContatto(){
+        
+    }
+    @FXML
+    public void mostraRubrica(){
+        
+    }
+    @FXML
+    public void displayAggiungiContatto(){
+        
+    }
+    @FXML
+    public void displayVisualizzaSingoloContatto(){
+        
+    }
+    @FXML
+    public void ricercaContatto(){
+        
+    }
 }
