@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package Interface.controller;
 
 /**
  * @file AggiuntaContattoController.java
  * @brief Controller per la gestione dell'aggiunta di un contatto nell'interfaccia grafica.
  *
- * Questo controller gestisce l'interfaccia grafica per l'aggiunta di un nuovo contatto
+ * Questo Interface.fxml.controller gestisce l'interfaccia grafica per l'aggiunta di un nuovo contatto
  * alla rubrica utilizzando JavaFX.
  */
 import java.net.URL;
@@ -21,9 +21,6 @@ import javafx.fxml.FXML;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 
@@ -121,8 +118,8 @@ public class AggiuntaContattoController implements Initializable {
     private ObservableList<Contatto> Contacts;
     
     /**
-     * @brief Inizializza il controller.
-     * @param url URL per inizializzare il controller.
+     * @brief Inizializza il Interface.fxml.controller.
+     * @param url URL per inizializzare il Interface.fxml.controller.
      * @param rb ResourceBundle per localizzazione.
      *
      * Questo metodo viene chiamato automaticamente all'avvio per inizializzare

@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package Interface.controller;
 
 /**
  * @file ModificaContattoController.java
  * @brief Controller per la gestione della modifica di un contatto nell'interfaccia grafica.
  *
- * Questo controller permette agli utenti di modificare i dettagli di un contatto
+ * Questo Interface.fxml.controller permette agli utenti di modificare i dettagli di un contatto
  * già esistente nella rubrica utilizzando JavaFX.
  */
 
@@ -118,8 +118,8 @@ public class ModificaContattoController implements Initializable {
     private ObservableList<Contatto> Contacts;
 
     /**
-     * @brief Inizializza il controller.
-     * @param url URL per l'inizializzazione del controller.
+     * @brief Inizializza il Interface.fxml.controller.
+     * @param url URL per l'inizializzazione del Interface.fxml.controller.
      * @param rb ResourceBundle per la localizzazione.
      *
      * Questo metodo viene chiamato automaticamente per inizializzare i componenti

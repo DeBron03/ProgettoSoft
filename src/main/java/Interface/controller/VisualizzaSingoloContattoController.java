@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package Interface.controller;
 /**
  * @file VisualizzaSingoloContattoController.java
  * @brief Controller per la visualizzazione dei dettagli di un singolo contatto.
  *
- * Questo controller gestisce la visualizzazione dei dettagli di un contatto
+ * Questo Interface.fxml.controller gestisce la visualizzazione dei dettagli di un contatto
  * selezionato dall'utente nell'interfaccia grafica di JavaFX.
  */
 
@@ -122,8 +122,8 @@ public class VisualizzaSingoloContattoController implements Initializable {
     private ObservableList<Contatto> Contacts;
 
     /**
-     * @brief Inizializza il controller.
-     * @param url URL per l'inizializzazione del controller.
+     * @brief Inizializza il Interface.fxml.controller.
+     * @param url URL per l'inizializzazione del Interface.fxml.controller.
      * @param rb ResourceBundle per la localizzazione.
      *
      * Questo metodo viene chiamato automaticamente per inizializzare i componenti
@@ -138,7 +138,7 @@ public class VisualizzaSingoloContattoController implements Initializable {
  * @brief Apre la finestra per modificare il contatto selezionato.
  * @param event L'evento che ha scatenato l'azione(Il tasto "Modifica").
  * @pre L'utente ha selezionato un contatto della rubrica.
- * @post Si apre l'interfaccia "ModificaContattoController.fxml"
+ * @post Si apre l'interfaccia "ModificaContattoController.Interface.fxml"
  * Metodo che permette all'utente di passare alla finestra di modifica
  * del contatto attualmente visualizzato. 
  */

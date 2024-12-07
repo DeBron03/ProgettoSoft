@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package Interface.controller;
 
 /**
  * @file MainInterfaceController.java
@@ -90,8 +90,8 @@ public class MainInterfaceController implements Initializable {
     private ObservableList<Contatto> Contacts;
 
     /**
-     * @brief Inizializza il controller.
-     * @param url URL per l'inizializzazione del controller.
+     * @brief Inizializza il Interface.fxml.controller.
+     * @param url URL per l'inizializzazione del Interface.fxml.controller.
      * @param rb ResourceBundle per la localizzazione.
      *
      * Questo metodo viene chiamato automaticamente per inizializzare i componenti
@@ -132,7 +132,7 @@ public void importaContatto(ActionEvent event) {
  * @brief Apre la finestra per aggiungere un nuovo contatto.
  * @param event L'evento che ha scatenato l'azione(Il tasto "+").
  * @pre L'utente ha selezionato "+" per aggiungere il contatto.
- * @post Si apre l'interfaccia "AggiuntaContattoController.fxml"
+ * @post Si apre l'interfaccia "AggiuntaContattoController.Interface.fxml"
  * Metodo che cambia la scena per permettere l'aggiunta di un nuovo contatto.
  * Il parametro `event` può essere usato per gestire dinamicamente la transizione.
  */
@@ -145,7 +145,7 @@ public void displayAggiungiContatto(ActionEvent event) {
  * @brief Apre la finestra per visualizzare un contatto selezionato.
  * @param event L'evento che ha scatenato l'azione.
  * @pre L'utente ha selezionato un contatto nella rubrica.
- * @post Si apre l'interfaccia "VisualizzaSingoloContatto.fxml"
+ * @post Si apre l'interfaccia "VisualizzaSingoloContatto.Interface.fxml"
  * Metodo che cambia la scena per visualizzare i dettagli di un contatto.
  * Può essere utilizzato per navigare verso una vista dettagliata.
  */

@@ -25,7 +25,7 @@ import javafx.stage.Stage;
  * @brief Classe per avviare l'applicazione JavaFX.
  *
  * Questa classe inizializza e mostra la finestra principale dell'applicazione
- * utilizzando il file `MainInterface.fxml`.
+ * utilizzando il file `MainInterface.Interface.fxml`.
  */
 public class Applicazione extends Application {
 
@@ -39,7 +39,7 @@ public class Applicazione extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("MainInterface.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("MainInterface.Interface.fxml"));
         
         Scene scene = new Scene(root);
         
