@@ -6,13 +6,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.MainInterfaceControllerController">
+<AnchorPane id="AnchorPane" prefHeight="700.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.MainInterfaceController">
      <children>
       <VBox layoutX="-1.0" layoutY="-2.0" prefHeight="740.0" prefWidth="600.0">
          <children>
             <HBox alignment="CENTER" prefHeight="42.0" prefWidth="600.0">
                <children>
-                  <Button fx:id="addContact" mnemonicParsing="false" onAction="#apriAggiuntaContatto" text="+" />
+                  <Button fx:id="addContact" mnemonicParsing="false" text="+" />
                   <TextField fx:id="researchField" prefHeight="39.0" prefWidth="243.0" />
                   <Button fx:id="exportContact" mnemonicParsing="false" text="Esporta Contatto" />
                   <Button fx:id="importContact" mnemonicParsing="false" text="Importa Contatto" />

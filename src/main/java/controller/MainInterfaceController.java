@@ -12,8 +12,6 @@ import data.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -23,7 +21,7 @@ import javafx.scene.control.TextField;
  *
  * @author lucac
  */
-public class MainInterfacerController implements Initializable {
+public class MainInterfaceController implements Initializable {
     private Rubrica contatti=new Rubrica();
     
     @FXML
