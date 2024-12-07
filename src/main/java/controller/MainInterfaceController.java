@@ -34,7 +34,7 @@ import javafx.event.ActionEvent;
  * Questa classe fornisce i metodi per interagire con la rubrica tramite
  * l'interfaccia grafica (JavaFX).
  */
-public class MainInterfacerController implements Initializable {
+public class MainInterfaceController implements Initializable {
 
     /**
      * @brief Istanza della rubrica che contiene i contatti.
