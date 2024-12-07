@@ -4,74 +4,174 @@
  * and open the template in the editor.
  */
 package controller;
+/**
+ * @file VisualizzaSingoloContattoController.java
+ * @brief Controller per la visualizzazione dei dettagli di un singolo contatto.
+ *
+ * Questo controller gestisce la visualizzazione dei dettagli di un contatto
+ * selezionato dall'utente nell'interfaccia grafica di JavaFX.
+ */
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
-import data.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import data.Contatto;
+import javafx.event.ActionEvent;
 
 /**
- * FXML Controller class
+ * @class VisualizzaSingoloContattoController
+ * @brief Classe FXML Controller per visualizzare i dettagli di un singolo contatto.
  *
- * @author lucac
+ * Fornisce metodi per gestire l'interazione con i dettagli di un contatto selezionato
+ * e permette di modificarlo, eliminarlo o tornare indietro.
  */
 public class VisualizzaSingoloContattoController implements Initializable {
 
+    /**
+     * @brief Etichetta per mostrare il nome del contatto.
+     */
     @FXML
     private Label nameContent;
+
+    /**
+     * @brief Etichetta per mostrare il cognome del contatto.
+     */
     @FXML
     private Label surnameContent;
+
+    /**
+     * @brief Etichetta per mostrare la data di nascita del contatto.
+     */
     @FXML
     private Label birthdayContent;
+
+    /**
+     * @brief Etichetta per mostrare il nome dell'azienda del contatto.
+     */
     @FXML
     private Label companyContent;
+
+    /**
+     * @brief Etichetta per mostrare il primo numero di telefono del contatto.
+     */
     @FXML
     private Label numberContent1;
+
+    /**
+     * @brief Etichetta per mostrare il secondo numero di telefono del contatto.
+     */
     @FXML
     private Label numberContent2;
+
+    /**
+     * @brief Etichetta per mostrare il terzo numero di telefono del contatto.
+     */
     @FXML
     private Label numberContent3;
+
+    /**
+     * @brief Etichetta per mostrare la prima email del contatto.
+     */
     @FXML
     private Label emailContent1;
+
+    /**
+     * @brief Etichetta per mostrare la seconda email del contatto.
+     */
     @FXML
     private Label emailContent2;
+
+    /**
+     * @brief Etichetta per mostrare la terza email del contatto.
+     */
     @FXML
     private Label emailContent3;
+
+    /**
+     * @brief Etichetta per mostrare l'indirizzo del contatto.
+     */
     @FXML
     private Label adressContent;
+
+    /**
+     * @brief Pulsante per aprire la finestra di modifica del contatto.
+     */
     @FXML
     private Button modifyButton;
+
+    /**
+     * @brief Pulsante per eliminare il contatto.
+     */
     @FXML
     private Button deleteButton;
+
+    /**
+     * @brief Pulsante per tornare alla visualizzazione della rubrica.
+     */
     @FXML
     private Button returnButton;
+
+    /**
+     * @brief Lista osservabile contenente i contatti.
+     */
     @FXML
     private ObservableList<Contatto> Contacts;
-    
+
+    /**
+     * @brief Inizializza il controller.
+     * @param url URL per l'inizializzazione del controller.
+     * @param rb ResourceBundle per la localizzazione.
+     *
+     * Questo metodo viene chiamato automaticamente per inizializzare i componenti
+     * FXML al caricamento della scena.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-     @FXML
-    public void displayModificaContatto(){
-        
+       
     }
-     @FXML
-    public void eliminaContatto(){
-        
-    }
-     @FXML
-    public void visualizzaContatto(){
-        
-    }
-     @FXML
-    public void annulla(){
-        
-    }
+
+/**
+ * @brief Apre la finestra per modificare il contatto selezionato.
+ * @param event L'evento che ha scatenato l'azione(Il tasto "Modifica").
+ * @pre L'utente ha selezionato un contatto della rubrica.
+ * @post Si apre l'interfaccia "ModificaContattoController.fxml"
+ * Metodo che permette all'utente di passare alla finestra di modifica
+ * del contatto attualmente visualizzato. 
+ */
+@FXML
+public void displayModificaContatto(ActionEvent event) {
+    
+}
+
+/**
+ * @brief Elimina il contatto visualizzato.
+ * @param event L'evento che ha scatenato l'azione(Il tasto "Elimna").
+ * @pre L'utente ha selezionato un contatton in rubrica.
+ * @post La rubrica viene aggiornata con l'eliminazione del contatto.
+ * Metodo che permette di eliminare il contatto attualmente selezionato
+ * dalla rubrica.
+ * @see eliminaContatto(Contatto c).
+ */
+@FXML
+public void eliminaContatto(ActionEvent event) {
+    
+}
+
+/**
+ * @brief Annulla l'operazione corrente e torna alla rubrica.
+ * @param event L'evento che ha scatenato l'azione(Il tasto "Annulla").
+ * @pre L'utente deve aver selezionato un contatto per visualizzare i suoi dati.
+ * @post L'utente torna alla MainInterface.
+ * Metodo che permette all'utente di tornare alla visualizzazione della
+ * lista completa dei contatti senza modificare nulla. 
+ * @see annulla().
+ */
+@FXML
+public void annulla(ActionEvent event) {
+}
+
 }
