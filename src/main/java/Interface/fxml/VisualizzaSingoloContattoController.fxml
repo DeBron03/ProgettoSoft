@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="590.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Interface.controller.VisualizzaSingoloContattoController">
+     <children>
+      <VBox layoutX="-3.0" layoutY="-2.0" prefHeight="500.0" prefWidth="599.0">
+         <children>
+            <HBox prefHeight="124.0" prefWidth="490.0">
+               <children>
+                  <VBox prefHeight="100.0" prefWidth="294.0">
+                     <children>
+                        <Label fx:id="nameView" alignment="CENTER" prefHeight="31.0" prefWidth="294.0" text="Nome" />
+                        <Label fx:id="nameContent" prefHeight="27.0" prefWidth="378.0" text="Nome" />
+                        <Label alignment="CENTER" prefHeight="27.0" prefWidth="305.0" text="Cognome" />
+                        <Label fx:id="surnameContent" prefHeight="60.0" prefWidth="294.0" text="Cognome" />
+                     </children>
+                  </VBox>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </ImageView>
+                  <Button fx:id="returnButton" mnemonicParsing="false" text="X">
+                     <HBox.margin>
+                        <Insets left="85.0" top="2.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <VBox prefHeight="350.0" prefWidth="618.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="656.0" text="Compleanno" />
+                  <Label fx:id="birthdayContent" prefHeight="27.0" prefWidth="668.0" text="Compleanno" />
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="742.0" text="Società" />
+                  <Label fx:id="companyContent" prefHeight="27.0" prefWidth="851.0" text="Società" />
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="685.0" text="Numero di telefono" />
+                  <Label fx:id="numberContent1" prefHeight="27.0" prefWidth="656.0" text="Numero 1" />
+                  <Label fx:id="numberContent2" prefHeight="27.0" prefWidth="688.0" text="Numero 2" />
+                  <Label fx:id="numberContent3" prefHeight="27.0" prefWidth="623.0" text="Numero 3" />
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="717.0" text="E-Mail" />
+                  <Label fx:id="emailContent1" prefHeight="27.0" prefWidth="706.0" text="E-Mail" />
+                  <Label fx:id="emailContent2" layoutX="10.0" layoutY="253.0" prefHeight="27.0" prefWidth="706.0" text="E-Mail" />
+                  <Label fx:id="emailContent3" layoutX="10.0" layoutY="253.0" prefHeight="27.0" prefWidth="706.0" text="E-Mail" />
+                  <Label alignment="CENTER" prefHeight="27.0" prefWidth="848.0" text="Indirizzo" />
+                  <Label fx:id="addressContent" prefHeight="27.0" prefWidth="700.0" text="Indirizzo" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="modifyButton" alignment="CENTER" mnemonicParsing="false" text="Modifica">
+                        </Button>
+                        <Button fx:id="deleteButton" mnemonicParsing="false" text="Elimina" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
