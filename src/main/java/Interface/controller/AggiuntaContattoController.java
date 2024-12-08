@@ -27,7 +27,8 @@ import javafx.scene.control.TextField;
 /**
  * @class AggiuntaContattoController
  * @brief Classe FXML Controller per la gestione dell'aggiunta dei contatti.
- *
+ * @invariant Tutti i campi FXML associati (es. `nameField`, `surnameField`, ecc.) devono essere inizializzati correttamente.
+ * @invariant La lista osservabile `Contacts` deve essere non null e riflettere correttamente i contatti attuali.
  * Gestisce i campi di input e i pulsanti relativi all'aggiunta di un nuovo contatto
  * nella rubrica.
  */
@@ -116,44 +117,46 @@ public class AggiuntaContattoController implements Initializable {
      */
     @FXML
     private ObservableList<Contatto> Contacts;
-    
+
     /**
      * @brief Inizializza il Interface.fxml.controller.
      * @param url URL per inizializzare il Interface.fxml.controller.
      * @param rb ResourceBundle per localizzazione.
-     *
+     * @invariant Dopo l'inizializzazione, tutti i campi FXML associati devono essere non null.
      * Questo metodo viene chiamato automaticamente all'avvio per inizializzare
      * i componenti FXML.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    } 
-    /**
- * @brief Aggiunge un nuovo contatto alla rubrica.
- * @param event L'evento che ha scatenato l'azione(Il tasto "Fine").
- * @pre  I campi "nameField" e "surnameField" devono essere compilati. Gli altri campi possono essere vuoti.
- * @post Un contatto è aggiunto sia alla lista grafica che alla struttura dati sottostante.
- * Metodo che gestisce la logica per l'aggiunta di un contatto alla rubrica.
- * 
- * @see aggiungiContatto().
- */
-@FXML
-public void aggiungiContatto(ActionEvent event) {
-   
-}
 
-/**
- * @brief Annulla l'operazione corrente.
- * @param event L'evento che ha scatenato l'azione(Il tasto "Annulla").
- * @pre L'utente Deve aver eseguito l'operazione di aggiunta.
- * @post L'utente torna alla MainInterface.
- * Metodo che gestisce la logica per annullare l'aggiunta di un contatto.
- * @see annulla().
- */
-@FXML
-public void annulla(ActionEvent event) {
-    
-}
+    }
+    /**
+     * @brief Aggiunge un nuovo contatto alla rubrica.
+     * @param event L'evento che ha scatenato l'azione(Il tasto "Fine").
+     * @pre  I campi "nameField" e "surnameField" devono essere compilati. Gli altri campi possono essere vuoti.
+     * @post Un nuovo contatto valido è aggiunto alla lista `Contacts` e visualizzato
+     *       nella lista grafica.
+     * Metodo che gestisce la logica per l'aggiunta di un contatto alla rubrica.
+     *
+     * @see aggiungiContatto() nella classe `Rubrica`.
+     * @invariant Dopo l'esecuzione, la lista `Contacts` deve riflettere lo stato aggiornato.
+     */
+    @FXML
+    public void aggiungiContatto(ActionEvent event) {
+
+    }
+
+    /**
+     * @brief Annulla l'operazione corrente.
+     * @param event L'evento che ha scatenato l'azione(Il tasto "Annulla").
+     * @pre L'utente deve essere in fase di aggiunta di un nuovo contatto.
+     * @post L'interfaccia torna alla `MainInterface` senza salvare il nuovo contatto.
+     * Metodo che gestisce la logica per annullare l'aggiunta di un contatto.
+     * @see annulla().
+     */
+    @FXML
+    public void annulla(ActionEvent event) {
+
+    }
 
 }

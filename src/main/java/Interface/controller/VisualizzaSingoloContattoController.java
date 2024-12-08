@@ -4,113 +4,118 @@
  * and open the template in the editor.
  */
 package Interface.controller;
-
 /**
- * @file AggiuntaContattoController.java
- * @brief Controller per la gestione dell'aggiunta di un contatto nell'interfaccia grafica.
+ * @file VisualizzaSingoloContattoController.java
+ * @brief Controller per la visualizzazione dei dettagli di un singolo contatto.
  *
- * Questo Interface.fxml.controller gestisce l'interfaccia grafica per l'aggiunta di un nuovo contatto
- * alla rubrica utilizzando JavaFX.
+ * Questo Interface.fxml.controller gestisce la visualizzazione dei dettagli di un contatto
+ * selezionato dall'utente nell'interfaccia grafica di JavaFX.
  */
+
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
-import data.*;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
-
+import javafx.scene.control.Label;
+import data.Contatto;
+import javafx.event.ActionEvent;
 
 /**
- * @class AggiuntaContattoController
- * @brief Classe FXML Controller per la gestione dell'aggiunta dei contatti.
- * @invariant Tutti i campi FXML associati (es. `nameField`, `surnameField`, ecc.) devono essere inizializzati correttamente.
- * @invariant La lista osservabile `Contacts` deve essere non null e riflettere correttamente i contatti attuali.
- * Gestisce i campi di input e i pulsanti relativi all'aggiunta di un nuovo contatto
- * nella rubrica.
+ * @class VisualizzaSingoloContattoController
+ * @brief Classe FXML Controller per visualizzare i dettagli di un singolo contatto.
+ * @invariant Il contatto selezionato deve essere sempre valido (non null e con dati consistenti).
+ * @invariant Tutti i campi grafici (es. `nameContent`, `surnameContent`, ecc.) devono essere inizializzati correttamente.
+ * @invariant La lista `Contacts` deve essere sincronizzata con lo stato della rubrica.
+ * Fornisce metodi per gestire l'interazione con i dettagli di un contatto selezionato
+ * e permette di modificarlo, eliminarlo o tornare indietro.
  */
-public class AggiuntaContattoController implements Initializable {
+public class VisualizzaSingoloContattoController implements Initializable {
 
     /**
-     * @brief Campo per inserire il nome del contatto.
+     * @brief Etichetta per mostrare il nome del contatto.
      */
     @FXML
-    private TextField nameField;
+    private Label nameContent;
 
     /**
-     * @brief Campo per inserire il cognome del contatto.
+     * @brief Etichetta per mostrare il cognome del contatto.
      */
     @FXML
-    private TextField surnameField;
+    private Label surnameContent;
 
     /**
-     * @brief Campo per selezionare la data di nascita del contatto.
+     * @brief Etichetta per mostrare la data di nascita del contatto.
      */
     @FXML
-    private DatePicker birthdayField;
+    private Label birthdayContent;
 
     /**
-     * @brief Campo per inserire la società del contatto.
+     * @brief Etichetta per mostrare il nome dell'azienda del contatto.
      */
     @FXML
-    private TextField companyField;
+    private Label companyContent;
 
     /**
-     * @brief Campo per inserire il primo numero di telefono.
+     * @brief Etichetta per mostrare il primo numero di telefono del contatto.
      */
     @FXML
-    private TextField numberField1;
+    private Label numberContent1;
 
     /**
-     * @brief Campo per inserire il secondo numero di telefono.
+     * @brief Etichetta per mostrare il secondo numero di telefono del contatto.
      */
     @FXML
-    private TextField numberField2;
+    private Label numberContent2;
 
     /**
-     * @brief Campo per inserire il terzo numero di telefono.
+     * @brief Etichetta per mostrare il terzo numero di telefono del contatto.
      */
     @FXML
-    private TextField numberField3;
+    private Label numberContent3;
 
     /**
-     * @brief Campo per inserire la prima email del contatto.
+     * @brief Etichetta per mostrare la prima email del contatto.
      */
     @FXML
-    private TextField emailField1;
+    private Label emailContent1;
 
     /**
-     * @brief Campo per inserire la seconda email del contatto.
+     * @brief Etichetta per mostrare la seconda email del contatto.
      */
     @FXML
-    private TextField emailField2;
+    private Label emailContent2;
 
     /**
-     * @brief Campo per inserire la terza email del contatto.
+     * @brief Etichetta per mostrare la terza email del contatto.
      */
     @FXML
-    private TextField emailField3;
+    private Label emailContent3;
 
     /**
-     * @brief Campo per inserire l'indirizzo del contatto.
+     * @brief Etichetta per mostrare l'indirizzo del contatto.
      */
     @FXML
-    private TextField adressField;
+    private Label adressContent;
 
     /**
-     * @brief Pulsante per aggiungere un nuovo contatto.
+     * @brief Pulsante per aprire la finestra di modifica del contatto.
      */
     @FXML
-    private Button addButton;
+    private Button modifyButton;
 
     /**
-     * @brief Pulsante per annullare l'aggiunta di un contatto.
+     * @brief Pulsante per eliminare il contatto.
      */
     @FXML
-    private Button delButton;
+    private Button deleteButton;
+
+    /**
+     * @brief Pulsante per tornare alla visualizzazione della rubrica.
+     */
+    @FXML
+    private Button returnButton;
 
     /**
      * @brief Lista osservabile contenente i contatti.
@@ -120,43 +125,55 @@ public class AggiuntaContattoController implements Initializable {
 
     /**
      * @brief Inizializza il Interface.fxml.controller.
-     * @param url URL per inizializzare il Interface.fxml.controller.
-     * @param rb ResourceBundle per localizzazione.
-     * @invariant Dopo l'inizializzazione, tutti i campi FXML associati devono essere non null.
-     * Questo metodo viene chiamato automaticamente all'avvio per inizializzare
-     * i componenti FXML.
+     * @param url URL per l'inizializzazione del Interface.fxml.controller.
+     * @param rb ResourceBundle per la localizzazione.
+     * @invariant Dopo l'inizializzazione, tutti i campi grafici devono essere non null.
+     * Questo metodo viene chiamato automaticamente per inizializzare i componenti
+     * FXML al caricamento della scena.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
     }
+
     /**
-     * @brief Aggiunge un nuovo contatto alla rubrica.
-     * @param event L'evento che ha scatenato l'azione(Il tasto "Fine").
-     * @pre  I campi "nameField" e "surnameField" devono essere compilati. Gli altri campi possono essere vuoti.
-     * @post Un nuovo contatto valido è aggiunto alla lista `Contacts` e visualizzato
-     *       nella lista grafica.
-     * Metodo che gestisce la logica per l'aggiunta di un contatto alla rubrica.
-     *
-     * @see aggiungiContatto() nella classe `Rubrica`.
-     * @invariant Dopo l'esecuzione, la lista `Contacts` deve riflettere lo stato aggiornato.
+     * @brief Apre la finestra per modificare il contatto selezionato.
+     * @param event L'evento che ha scatenato l'azione(Il tasto "Modifica").
+     * @pre L'utente ha selezionato un contatto della rubrica.
+     * @post Si apre l'interfaccia "ModificaContattoController.Interface.fxml"
+     * Metodo che permette all'utente di passare alla finestra di modifica
+     * del contatto attualmente visualizzato.
      */
     @FXML
-    public void aggiungiContatto(ActionEvent event) {
+    public void displayModificaContatto(ActionEvent event) {
 
     }
 
     /**
-     * @brief Annulla l'operazione corrente.
+     * @brief Elimina il contatto visualizzato.
+     * @param event L'evento che ha scatenato l'azione(Il tasto "Elimna").
+     * @pre L'utente ha selezionato un contatton in rubrica.
+     * @post Il contatto viene rimosso dalla rubrica e la lista dei contatti è aggiornata.
+     * Metodo che permette di eliminare il contatto attualmente selezionato
+     * dalla rubrica.
+     * @see eliminaContatto(Contatto c).
+     */
+    @FXML
+    public void eliminaContatto(ActionEvent event) {
+
+    }
+
+    /**
+     * @brief Annulla l'operazione corrente e torna alla rubrica.
      * @param event L'evento che ha scatenato l'azione(Il tasto "Annulla").
-     * @pre L'utente deve essere in fase di aggiunta di un nuovo contatto.
-     * @post L'interfaccia torna alla `MainInterface` senza salvare il nuovo contatto.
-     * Metodo che gestisce la logica per annullare l'aggiunta di un contatto.
+     * @pre L'utente deve aver selezionato un contatto valido per visualizzarne i dettagli.
+     * @post L'utente torna alla `MainInterface` senza modificare il contatto.
+     * Metodo che permette all'utente di tornare alla visualizzazione della
+     * lista completa dei contatti senza modificare nulla.
      * @see annulla().
      */
     @FXML
     public void annulla(ActionEvent event) {
-
     }
 
 }
