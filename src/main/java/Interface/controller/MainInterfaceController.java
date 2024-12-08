@@ -30,7 +30,9 @@ import javafx.event.ActionEvent;
 /**
  * @class MainInterfaceController
  * @brief Controller per l'interfaccia principale della rubrica.
- *
+ * @invariant La rubrica "contatti" non deve mai essere null.
+ * @invariant Tutti i campi annotati con `@FXML` devono essere inizializzati correttamente.
+ * @invariant La lista `Contacts` deve sempre riflettere lo stato corrente della rubrica.
  * Questa classe fornisce i metodi per interagire con la rubrica tramite
  * l'interfaccia grafica (JavaFX).
  */
@@ -38,6 +40,7 @@ public class MainInterfaceController implements Initializable {
 
     /**
      * @brief Istanza della rubrica che contiene i contatti.
+     * @invariant Non deve mai essere null.
      */
     private Rubrica contatti = new Rubrica();
 
@@ -93,7 +96,7 @@ public class MainInterfaceController implements Initializable {
      * @brief Inizializza il Interface.fxml.controller.
      * @param url URL per l'inizializzazione del Interface.fxml.controller.
      * @param rb ResourceBundle per la localizzazione.
-     *
+     * @invariant Dopo l'inizializzazione, tutti i campi FXML devono essere non null.
      * Questo metodo viene chiamato automaticamente per inizializzare i componenti
      * FXML al caricamento della scena.
      */
@@ -105,7 +108,7 @@ public class MainInterfaceController implements Initializable {
     /**
  * @brief Esporta i contatti della rubrica.
  * @param event L'evento che ha scatenato l'azione(Il tasto "esporta").
- * @pre Deve esserci almeno un contatto nella rubrica
+ * @pre Deve esserci almeno un contatto nella rubrica (`Contacts` non è vuota).
  * @post Viene generato un file esterno con i contatti esportati.
  * Metodo che gestisce l'esportazione dei contatti in un file esterno.
  * @see esportaContatto().
@@ -135,6 +138,7 @@ public void importaContatto(ActionEvent event) {
  * @post Si apre l'interfaccia "AggiuntaContattoController.Interface.fxml"
  * Metodo che cambia la scena per permettere l'aggiunta di un nuovo contatto.
  * Il parametro `event` può essere usato per gestire dinamicamente la transizione.
+ * @see AggiuntaContattoController.
  */
 @FXML
 public void displayAggiungiContatto(ActionEvent event) {
@@ -148,6 +152,8 @@ public void displayAggiungiContatto(ActionEvent event) {
  * @post Si apre l'interfaccia "VisualizzaSingoloContatto.Interface.fxml"
  * Metodo che cambia la scena per visualizzare i dettagli di un contatto.
  * Può essere utilizzato per navigare verso una vista dettagliata.
+ * @see VisualizzaSingoloContattoController.
+ * 
  */
 @FXML
 public void displayVisualizzaSingoloContatto(ActionEvent event) {
@@ -158,7 +164,7 @@ public void displayVisualizzaSingoloContatto(ActionEvent event) {
  * @brief Effettua una ricerca di contatti nella rubrica.
  * @param event L'evento che ha scatenato l'azione(Utente scrive nella barra di ricerca).
  * @pre L'utente clicca sulla barra di ricerca
- * @post L'app mostra i contatti che corrispondono ai criteri di ricerca
+ * @post La tabella mostra i contatti che corrispondono ai criteri di ricerca
  * Metodo che filtra i contatti visualizzati nella tabella in base al testo
  * inserito nel campo di ricerca. 
  * @see ricercaContatto(String s)
