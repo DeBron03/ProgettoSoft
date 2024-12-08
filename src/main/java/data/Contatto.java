@@ -22,7 +22,9 @@ import java.time.LocalDate;
 /**
  * @class Contatto
  * @brief Classe che rappresenta un contatto con i relativi dettagli.
- *
+ * @invariant Il nome o il cognome del contatto non possono essere null o vuoti.
+ * @invariant Tutte le email (email1, email2, email3) devono essere valide se specificate.
+ * @invariant La data di compleanno, se presente, deve essere una data valida.
  * Questa classe fornisce metodi per accedere e modificare le informazioni
  * personali di un contatto, tra cui nome, cognome, numeri di telefono, email,
  * azienda, indirizzo e data di compleanno.
@@ -30,11 +32,13 @@ import java.time.LocalDate;
 public class Contatto {
     /**
      * @brief Nome del contatto.
+     * @invariant Il nome non può essere null o vuoto.
      */
     private String nome;
 
     /**
      * @brief Cognome del contatto.
+     * @invariant Il cognome non può essere null o vuoto.
      */
     private String cognome;
 
@@ -55,16 +59,19 @@ public class Contatto {
 
     /**
      * @brief Prima email del contatto.
+     * @invariant Se non null, deve essere un indirizzo email valido
      */
     private String email1;
 
     /**
      * @brief Seconda email del contatto.
+     * @invariant Se non null, deve essere un indirizzo email valido
      */
     private String email2;
 
     /**
      * @brief Terza email del contatto.
+     * @invariant Se non null, deve essere un indirizzo email valido
      */
     private String email3;
 
@@ -80,6 +87,7 @@ public class Contatto {
 
     /**
      * @brief Data di compleanno del contatto.
+     * @invariant Se specificata, deve essere una data valida.
      */
     private LocalDate compleanno;
 

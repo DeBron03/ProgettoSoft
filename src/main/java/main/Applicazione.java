@@ -33,7 +33,7 @@ public class Applicazione extends Application {
      * @brief Metodo principale per inizializzare l'interfaccia grafica.
      * @param stage Il palco principale dell'applicazione.
      * @throws Exception Se si verifica un errore durante il caricamento della scena.
-     *
+     * @invariant Il file FXML deve essere caricato correttamente e non deve essere null.
      * Questo metodo carica il file FXML e lo assegna a una scena da mostrare nel
      * palco principale.
      */

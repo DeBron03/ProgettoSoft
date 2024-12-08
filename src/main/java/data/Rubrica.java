@@ -12,7 +12,9 @@ package data;
 /**
  * @file Rubrica.java
  * @brief Classe per la gestione della rubrica dei contatti.
- *
+ * @invariant La lista `contatti` non deve mai essere null.
+ * @invariant Non ci devono essere duplicati nella lista `contatti`.
+ * @invariant Ogni contatto nella lista `contatti` deve essere valido.
  * La classe `Rubrica` fornisce metodi per aggiungere, visualizzare, cercare,
  * modificare, esportare, importare ed eliminare contatti, oltre a supportare
  * l'annullamento di operazioni.
@@ -25,13 +27,14 @@ import java.util.List;
 /**
  * @class Rubrica
  * @brief Classe che rappresenta una rubrica per la gestione dei contatti.
- *
+ * 
  * Questa classe contiene una lista di contatti e fornisce metodi per la gestione
  * e la manipolazione dei contatti.
  */
 public class Rubrica {
     /**
      * @brief Lista che contiene tutti i contatti della rubrica.
+     * @invariant La lista deve essere sempre inizializzata e non può mai essere null.
      */
     private List<Contatto> contatti;
 
@@ -45,6 +48,8 @@ public class Rubrica {
     /**
      * @brief Aggiunge un nuovo contatto alla rubrica.
      * @param contatto Il contatto da aggiungere.
+     * @invariant Dopo l'aggiunta, la lista non deve contenere duplicati.
+     * @invariant Il contatto aggiunto deve essere valido(aggiunta di un nome o un cognome).
      */
     public void aggiungiContatto(Contatto contatto) {
         contatti.add(contatto);
@@ -52,6 +57,7 @@ public class Rubrica {
 
     /**
      * @brief Mostra tutti i contatti presenti nella rubrica.
+     * @invariant La lista restituita deve contenere solo contatti validi.
      * @return Una lista di tutti i contatti.
      */
     public List<Contatto> mostraRubrica() {
@@ -81,7 +87,7 @@ public class Rubrica {
 
     /**
      * @brief Importa contatti nella rubrica.
-     *
+     *@invariant I contatti importati devono essere validi e non devono introdurre duplicati.
      * Metodo da implementare per importare contatti da un formato specifico
      * 
      */
@@ -101,6 +107,7 @@ public class Rubrica {
     /**
      * @brief Modifica un contatto esistente nella rubrica.
      *@param c Contatto da Modificare nella Lista.
+     * @invariant Dopo la modifica, il contatto deve rimanere valido.
      * Metodo da implementare per aggiornare i dettagli di un contatto esistente.
      *  @see setNome(), setCognome(), setTelefono1(), setTelefono2(),setTelefono3(),setEmail1(),setEmail2(),setEmail3(),setSocietà(),setIndirizzo(),setCompleanno().
      */
@@ -110,7 +117,7 @@ public class Rubrica {
 
     /**
      * @brief Annulla l'ultima operazione eseguita.
-     *
+     *@invariant Lo stato della rubrica deve tornare allo stato precedente.
      * Metodo da implementare per ripristinare lo stato precedente della rubrica,
      * utilizzando un'istanza di `AnnullaOperazione`.
      */

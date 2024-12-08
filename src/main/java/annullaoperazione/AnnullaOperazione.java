@@ -16,13 +16,16 @@ import java.util.List;
 /**
  * @class AnnullaOperazione
  * @brief Classe per gestire gli stati precedenti dei contatti.
- *
+ * @invariant La lista `statiPrecedenti` non deve mai essere null.
+ * @invariant Ogni stato salvato in `statiPrecedenti` deve essere una copia indipendente
+ *            dello stato corrente dei contatti.
  * Questa classe permette di salvare lo stato corrente dei contatti e
  * di ripristinare uno stato precedente in caso di annullamento.
  */
 public class AnnullaOperazione {
     /**
      * @brief Lista che contiene gli stati precedenti dei contatti.
+     * @invariant La lista non deve mai essere null.
      */
     private List<Contatto> statiPrecedenti;
 
@@ -48,6 +51,9 @@ public class AnnullaOperazione {
 
    /**
      * @brief Ripristina uno stato precedente dei contatti.
+     * @invariant Se la lista `statiPrecedenti` è vuota, restituisce null o un valore predefinito.
+     * @invariant Dopo il ripristino, lo stato attuale deve corrispondere all'ultimo stato salvato.
+     *
      * @return Una lista dei contatti che rappresenta lo stato precedente.
      *
      * Questo metodo restituisce l'ultimo stato salvato dei contatti,
