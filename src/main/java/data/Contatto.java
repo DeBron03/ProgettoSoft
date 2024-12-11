@@ -32,7 +32,7 @@ import java.time.LocalDate;
 public class Contatto implements Comparable<Contatto>{
     /**
      * @brief Nome del contatto.
-     * @invariant Il nome non può essere null o vuoto.
+     * @invariant Il nome non può essere null o vuoto. 
      */
     private String nome;
 
