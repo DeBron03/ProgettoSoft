@@ -27,7 +27,7 @@ public class AnnullaOperazione {
      * @brief Lista che contiene gli stati precedenti dei contatti.
      * @invariant La lista non deve mai essere null.
      */
-    private List<Contatto> statiPrecedenti;
+    private List<Contatto> statoPrecedente;
 
     /**
      * @brief Costruttore di default.
@@ -35,7 +35,7 @@ public class AnnullaOperazione {
      * Inizializza la lista degli stati precedenti come una nuova lista vuota.
      */
     public AnnullaOperazione() {
-        statiPrecedenti = new ArrayList<>();
+        statoPrecedente = new ArrayList<>();
     }
 
     /**
@@ -46,10 +46,10 @@ public class AnnullaOperazione {
      * nella lista degli stati precedenti.
      */
     public void salvaStato(List<Contatto> statoCorrente) {
-        
+        statoPrecedente = new ArrayList<>(statoCorrente);
     }
 
-   /**
+    /**
      * @brief Ripristina uno stato precedente dei contatti.
      * @invariant Se la lista `statiPrecedenti` è vuota, restituisce null o un valore predefinito.
      * @invariant Dopo il ripristino, lo stato attuale deve corrispondere all'ultimo stato salvato.
@@ -60,6 +60,6 @@ public class AnnullaOperazione {
      * permettendo di annullare l'operazione corrente.
      */
     public List<Contatto> annulla() {
-      return statiPrecedenti;
-}
+        return new ArrayList<>(statoPrecedente);
+    }
 }

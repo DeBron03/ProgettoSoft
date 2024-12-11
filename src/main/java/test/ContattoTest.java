@@ -66,8 +66,8 @@ public class ContattoTest {
 
     @Test
     void testSetSocietà() {
-        contatto.setSocietà("OpenAI");
-        assertEquals("OpenAI", contatto.getSocietà());
+        contatto.setSocietà("PeppeBrescia S.r.l.");
+        assertEquals("PeppeBrescia S.r.l.", contatto.getSocietà());
     }
 
     @Test
@@ -75,7 +75,7 @@ public class ContattoTest {
         LocalDate compleanno = LocalDate.of(1985, 5, 20);
         Contatto c = new Contatto(
                 "Anna", "Bianchi",
-                "+1234567890", "+0987654321", "+1122334455",
+                "+1234567890","+0987654321", "+1122334455",
                 "anna.bianchi@example.com", "contact@work.com", null,
                 "Azienda S.p.A.", "Via Roma, 1", compleanno
         );
