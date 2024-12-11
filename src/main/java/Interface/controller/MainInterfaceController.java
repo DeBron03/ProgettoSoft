@@ -147,7 +147,7 @@ public void importaContatto(ActionEvent event) {
  */
 @FXML
 public void displayAggiungiContatto(ActionEvent event) throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/progettoingeseguibile/AggiuntaContattoController.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Interface/fxml/AggiuntaContattoController.fxml"));
     Parent root = loader.load();
     Stage stage = new Stage();
     stage.setTitle("Aggiungi Contatto");
@@ -172,7 +172,7 @@ public void displayVisualizzaSingoloContatto(ActionEvent event) throws IOExcepti
         System.out.println("Nessun contatto selezionato.");
         return;
     }
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/progettoingeseguibile/VisualizzaSingoloContattoController.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Interface/fxml/VisualizzaSingoloContattoController.fxml"));
     Parent root = loader.load();
     Stage stage = new Stage();
     stage.setTitle("Dettagli Contatto");

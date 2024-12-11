@@ -151,7 +151,7 @@ public class VisualizzaSingoloContattoController implements Initializable {
  */
 @FXML
 public void displayModificaContatto(ActionEvent event) throws IOException {
-     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/progettoingeseguibile/ModificaContattoController.fxml"));
+     FXMLLoader loader = new FXMLLoader(getClass().getResource("/Interface/fxml/ModificaContattoController.fxml"));
     Parent root = loader.load();
     Stage stage = new Stage();
     stage.setTitle("Modifica Contatto");
