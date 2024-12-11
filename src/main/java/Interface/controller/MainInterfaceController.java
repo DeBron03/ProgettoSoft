@@ -25,7 +25,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import data.Contatto;
 import data.Rubrica;
+import java.io.IOException;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /**
  * @class MainInterfaceController
@@ -141,8 +146,13 @@ public void importaContatto(ActionEvent event) {
  * @see AggiuntaContattoController.
  */
 @FXML
-public void displayAggiungiContatto(ActionEvent event) {
-   
+public void displayAggiungiContatto(ActionEvent event) throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/progettoingeseguibile/AggiuntaContattoController.fxml"));
+    Parent root = loader.load();
+    Stage stage = new Stage();
+    stage.setTitle("Aggiungi Contatto");
+    stage.setScene(new Scene(root));
+    stage.show();
 }
 
 /**
@@ -156,8 +166,18 @@ public void displayAggiungiContatto(ActionEvent event) {
  * 
  */
 @FXML
-public void displayVisualizzaSingoloContatto(ActionEvent event) {
-    
+public void displayVisualizzaSingoloContatto(ActionEvent event) throws IOException {
+    Contatto contattoSelezionato = rubrica.getSelectionModel().getSelectedItem();
+    if (contattoSelezionato == null) {
+        System.out.println("Nessun contatto selezionato.");
+        return;
+    }
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/mycompany/progettoingeseguibile/VisualizzaSingoloContattoController.fxml"));
+    Parent root = loader.load();
+    Stage stage = new Stage();
+    stage.setTitle("Dettagli Contatto");
+    stage.setScene(new Scene(root));
+    stage.show();
 }
 
 /**
