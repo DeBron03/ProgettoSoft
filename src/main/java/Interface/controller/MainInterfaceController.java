@@ -42,7 +42,7 @@ public class MainInterfaceController implements Initializable {
      * @brief Istanza della rubrica che contiene i contatti.
      * @invariant Non deve mai essere null.
      */
-    private Rubrica contatti = new Rubrica();
+    private Rubrica contatti = new Rubrica("Hal9000");
 
     /**
      * @brief Campo di testo per la ricerca di contatti.
@@ -152,7 +152,7 @@ public void displayAggiungiContatto(ActionEvent event) {
  * @post Si apre l'interfaccia "VisualizzaSingoloContatto.Interface.fxml"
  * Metodo che cambia la scena per visualizzare i dettagli di un contatto.
  * Può essere utilizzato per navigare verso una vista dettagliata.
- * @see VisualizzaSingoloContattoController.
+ * @see VisualizzaSingoloContattoController
  * 
  */
 @FXML

@@ -29,7 +29,7 @@ import java.time.LocalDate;
  * personali di un contatto, tra cui nome, cognome, numeri di telefono, email,
  * azienda, indirizzo e data di compleanno.
  */
-public class Contatto {
+public class Contatto implements Comparable<Contatto>{
     /**
      * @brief Nome del contatto.
      * @invariant Il nome non può essere null o vuoto.
@@ -110,23 +110,31 @@ public class Contatto {
     }
 
     /**
-     * @param nome      Nome del contatto.
-     * @param cognome   Cognome del contatto.
-     * @param telefono1 Primo numero di telefono.
      * @brief Costruttore completo per creare un contatto con dettagli completi.
+     * @param nome Nome del contatto.
+     * @param cognome Cognome del contatto.
+     * @param telefono1 Primo numero di telefono.
+     * @param telefono2 Secondo numero di telefono.
+     * @param telefono3 Terzo numero di telefono.
+     * @param email1 Prima email del contatto.
+     * @param email2 Seconda email del contatto.
+     * @param email3 Terza email del contatto.
+     * @param società Nome dell'azienda.
+     * @param indirizzo Indirizzo del contatto.
+     * @param compleanno Data di compleanno del contatto.
      */
 
 
 
-    public Contatto(String nome, String cognome, String telefono1, String telefono2, String telefono3,
-                    String email1, String email2, String email3,
+    public Contatto(String nome, String cognome, String telefono1, String telefono2,
+                    String telefono3, String email1, String email2, String email3,
                     String società, String indirizzo, LocalDate compleanno) {
         if ((nome == null || nome.isEmpty()) && (cognome == null || cognome.isEmpty())) {
-        throw new IllegalArgumentException("Almeno uno tra nome e cognome deve essere fornito.");
-    }else{
-        this.nome = nome;
-        this.cognome = cognome;
-    }
+            throw new IllegalArgumentException("Almeno uno tra nome e cognome deve essere fornito.");
+        }else{
+            this.nome = nome;
+            this.cognome = cognome;
+        }
         this.telefono1 = telefono1;
         this.telefono2 = telefono2;
         this.telefono3 = telefono3;
@@ -320,6 +328,14 @@ public class Contatto {
     public void setCompleanno(LocalDate compleanno) {
         this.compleanno = compleanno;
     }
-
+    @Override
+    public int compareTo(Contatto other) {
+        // Ordina per cognome, poi per nome
+        int comparenome = this.nome.compareToIgnoreCase(other.nome);
+        if (comparenome != 0) {
+            return comparenome;
+        }
+        return this.cognome.compareToIgnoreCase(other.cognome);
+    }
 
 }
