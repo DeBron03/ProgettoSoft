@@ -16,12 +16,15 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import data.*;
+import java.time.LocalDate;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+
 
 
 /**
@@ -142,8 +145,85 @@ public class AggiuntaContattoController implements Initializable {
  * @invariant Dopo l'esecuzione, la lista `Contacts` deve riflettere lo stato aggiornato.
  */
 @FXML
-public void aggiungiContatto(ActionEvent event) {
-   
+public void addContact(ActionEvent event) {
+    // Validazione dei campi obbligatori
+    Rubrica rubrica=new Rubrica("cervo");
+    String nome = nameField.getText().trim();
+    String cognome = surnameField.getText().trim();
+    
+    if (nome.isEmpty() || cognome.isEmpty()) {
+        mostraMessaggioErrore("Nome e Cognome sono campi obbligatori.");
+        return;
+    }
+
+    
+    LocalDate compleanno = birthdayField.getValue();
+    String società = companyField.getText().trim();
+    String telefono1 = numberField1.getText().trim();
+    String telefono2 = numberField2.getText().trim();
+    String telefono3 = numberField3.getText().trim();
+    String email1 = emailField1.getText().trim();
+    String email2 = emailField2.getText().trim();
+    String email3 = emailField3.getText().trim();
+    String indirizzo = adressField.getText().trim();
+
+    
+    Contatto nuovoContatto = new Contatto(
+        nome, cognome, telefono1, telefono2, telefono3,email1, email2, email3,società,indirizzo,compleanno);
+    
+
+    rubrica.aggiungiContatto(nuovoContatto);
+    
+    Contacts.add(nuovoContatto);
+
+    
+    mostraMessaggioConferma("Contatto aggiunto con successo!");
+
+    
+    pulisciCampi();
+}
+
+/**
+ * @brief Mostra un messaggio di errore all'utente.
+ * @param messaggio Il messaggio da mostrare.
+ */
+private void mostraMessaggioErrore(String messaggio) {
+    
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Errore");
+    alert.setHeaderText(null);
+    alert.setContentText(messaggio);
+    alert.showAndWait();
+}
+
+/**
+ * @brief Mostra un messaggio di conferma all'utente.
+ * @param messaggio Il messaggio da mostrare.
+ */
+private void mostraMessaggioConferma(String messaggio) {
+    
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("Successo");
+    alert.setHeaderText(null);
+    alert.setContentText(messaggio);
+    alert.showAndWait();
+}
+
+/**
+ * @brief Pulisce i campi di input del form.
+ */
+private void pulisciCampi() {
+    nameField.clear();
+    surnameField.clear();
+    birthdayField.setValue(null);
+    companyField.clear();
+    numberField1.clear();
+    numberField2.clear();
+    numberField3.clear();
+    emailField1.clear();
+    emailField2.clear();
+    emailField3.clear();
+    adressField.clear();
 }
 
 /**
