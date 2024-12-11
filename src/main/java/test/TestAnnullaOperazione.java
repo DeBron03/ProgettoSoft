@@ -59,6 +59,6 @@ class AnnullaOperazioneTest {
         assertNotNull(statoRipristinato);
         assertEquals(2, statoRipristinato.size());
         assertEquals("Mario", statoRipristinato.get(0).getNome());
-        assertEquals("Luigi", statoRipristinato.get(1).getNome());
+        assertEquals("Luigi", statoRipristinato.get(1).getNome()); 
     }
 }
