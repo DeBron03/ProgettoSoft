@@ -91,8 +91,26 @@ public class Contatto {
      */
     private LocalDate compleanno;
 
+    //Costruttore essenziale
+    public Contatto(String nome, String cognome) {
+        if ((nome == null || nome.isEmpty()) && (cognome == null || cognome.isEmpty())) {
+            throw new IllegalArgumentException("Almeno uno tra nome e cognome deve essere fornito.");
+        }
+        this.nome = nome;
+        this.cognome = cognome;
+    }
+
+    // Validazione email
+    private boolean isValidEmail(String email) {
+        return email != null && email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+    }
+    //Validazione numeri di telefono
+    private boolean isValidPhoneNumber(String telefono) {
+        return telefono == null || telefono.matches("^\\+?[0-9]{10,15}$");
+    }
+
     /**
-     * @brief Costruttore per creare un contatto con dettagli completi.
+     * @brief Costruttore completo per creare un contatto con dettagli completi.
      * @param nome Nome del contatto.
      * @param cognome Cognome del contatto.
      * @param telefono1 Primo numero di telefono.
@@ -101,15 +119,22 @@ public class Contatto {
      * @param email1 Prima email del contatto.
      * @param email2 Seconda email del contatto.
      * @param email3 Terza email del contatto.
-     * @param societa Nome dell'azienda.
+     * @param società Nome dell'azienda.
      * @param indirizzo Indirizzo del contatto.
      * @param compleanno Data di compleanno del contatto.
      */
+
+
+
     public Contatto(String nome, String cognome, String telefono1, String telefono2,
                     String telefono3, String email1, String email2, String email3,
                     String società, String indirizzo, LocalDate compleanno) {
+        if ((nome == null || nome.isEmpty()) && (cognome == null || cognome.isEmpty())) {
+        throw new IllegalArgumentException("Almeno uno tra nome e cognome deve essere fornito.");
+    }else{
         this.nome = nome;
         this.cognome = cognome;
+    }
         this.telefono1 = telefono1;
         this.telefono2 = telefono2;
         this.telefono3 = telefono3;
@@ -136,7 +161,11 @@ public class Contatto {
      * @param telefono1 Primo numero di telefono da impostare.
      */
     public void setTelefono1(String telefono1) {
+        if (!isValidPhoneNumber(telefono1)) {
+            throw new IllegalArgumentException("Telefono1 non valido. Deve contenere solo numeri e può includere un prefisso +.");
+        }
         this.telefono1 = telefono1;
+
     }
     /**
      * @brief Restituisce il cognome del contatto.
@@ -206,6 +235,9 @@ public class Contatto {
      * @param telefono2 Secondo numero di telefono da impostare.
      */
     public void setTelefono2(String telefono2) {
+        if (!isValidPhoneNumber(telefono2)) {
+            throw new IllegalArgumentException("Telefono2 non valido. Deve contenere solo numeri e può includere un prefisso +.");
+        }
         this.telefono2 = telefono2;
     }
     /**
@@ -213,6 +245,9 @@ public class Contatto {
      * @param telefono3 Terzo numero di telefono da impostare.
      */
     public void setTelefono3(String telefono3) {
+        if (!isValidPhoneNumber(telefono3)) {
+            throw new IllegalArgumentException("Telefono3 non valido. Deve contenere solo numeri e può includere un prefisso +.");
+        }
         this.telefono3 = telefono3;
     }
     /**
@@ -220,6 +255,9 @@ public class Contatto {
      * @param email1 Prima mail del contatto da impostare.
      */
     public void setEmail1(String email1) {
+        if (email1 != null && !isValidEmail(email1)) {
+            throw new IllegalArgumentException("Email1 non valida.");
+        }
         this.email1 = email1;
     }
     /**
@@ -227,6 +265,9 @@ public class Contatto {
      * @param email2 Seconda mail del contatto da impostare.
      */
     public void setEmail2(String email2) {
+        if (email2 != null && !isValidEmail(email2)) {
+            throw new IllegalArgumentException("Email2 non valida.");
+        }
         this.email2 = email2;
     }
     /**
@@ -234,6 +275,9 @@ public class Contatto {
      * @param email3 terza mail del contatto da impostare.
      */
     public void setEmail3(String email3) {
+        if (email3 != null && !isValidEmail(email3)) {
+            throw new IllegalArgumentException("Email3 non valida.");
+        }
         this.email3 = email3;
     }
     /**
@@ -251,8 +295,8 @@ public class Contatto {
         this.indirizzo = indirizzo;
     }
 
-    
-    
+
+
     /**
      * @brief Restituisce il nome del contatto.
      * @return Stringa contenente il nome.
@@ -284,4 +328,6 @@ public class Contatto {
     public void setCompleanno(LocalDate compleanno) {
         this.compleanno = compleanno;
     }
+
+
 }
