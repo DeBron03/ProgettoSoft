@@ -21,7 +21,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         rubricaCondivisa = new Rubrica();
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("MainInterfaceController.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/com/francesco/rubrica/MainInterfaceController.fxml"));
         Parent root = fxmlLoader.load();
         MainInterfaceController mainController = fxmlLoader.getController();
         mainController.setRubrica(rubricaCondivisa);
