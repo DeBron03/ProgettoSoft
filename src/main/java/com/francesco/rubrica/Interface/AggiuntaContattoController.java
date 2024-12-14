@@ -18,9 +18,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import static com.francesco.rubrica.Data.Contatto.isValidEmail;
+import static com.francesco.rubrica.Data.Contatto.isValidPhoneNumber;
 
 /**
  * @class AggiuntaContattoController
@@ -144,6 +147,36 @@ public class AggiuntaContattoController implements Initializable {
 
     @FXML
     public void aggiungiContatto(ActionEvent event) {
+        if ((nameField.getText().trim() == null || nameField.getText().trim().isEmpty()) &&
+                (surnameField.getText().trim() == null || surnameField.getText().trim().isEmpty())){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Errore");
+        alert.setHeaderText("Nome o cognome non inseriti");
+        alert.setContentText("Inserisci almeno un nome o un cognome.");
+        alert.showAndWait();
+        return; }
+
+        if (!isValidPhoneNumber(numberField1.getText().trim()) ||
+                !isValidPhoneNumber(numberField2.getText().trim()) ||
+                !isValidPhoneNumber(numberField3.getText().trim())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Errore");
+            alert.setHeaderText("Numero di telefono non valido");
+            alert.setContentText("Inserisci un numero di telefono valido (10-15 cifre).");
+            alert.showAndWait();
+            return;
+        }
+
+        if (!isValidEmail(emailField1.getText().trim()) ||
+                !isValidEmail(emailField2.getText().trim()) ||
+                !isValidEmail(emailField3.getText().trim())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Errore");
+            alert.setHeaderText("Email non valida");
+            alert.setContentText("Inserisci un'email valida.");
+            alert.showAndWait();
+            return;
+        }
         String nome = nameField.getText().trim();
         String cognome = surnameField.getText().trim();
         LocalDate compleanno = birthdayField.getValue();

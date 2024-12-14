@@ -134,12 +134,20 @@ public class Rubrica {
             line = reader.readLine();
             System.out.println("Intestazione ignorata: " + line);
             while ((line = reader.readLine()) != null) {
-
                 if (line.isEmpty() || !line.contains(";")) {
                     continue;
                 }
                 System.out.println("Riga letta: " + line);
                 String[] fields = line.split(";");
+
+                if (fields.length < 11) {
+                    String[] newFields = new String[11];
+                    System.arraycopy(fields, 0, newFields, 0, fields.length);
+                    for (int i = fields.length; i < 11; i++) {
+                        newFields[i] = "";
+                    }
+                    fields = newFields;
+                }
 
                 String nome = fields[0].trim();
                 String cognome = fields[1].trim();
@@ -151,14 +159,14 @@ public class Rubrica {
                 String email3 = fields[7].trim().isEmpty() ? " " : fields[7].trim();
                 String società = fields[8].trim().isEmpty() ? " " : fields[8].trim();
                 String indirizzo = fields[9].trim().isEmpty() ? " " : fields[9].trim();
-                String compleannoStringa = fields[10].trim();
+                String compleannoStringa = fields[10].trim().isEmpty() ? " " : fields[10].trim();
 
                 if (nome.isEmpty() && cognome.isEmpty()) {
                     System.out.println("Contatto ignorato: manca sia il nome che il cognome.");
                     continue;
                 }
 
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd", Locale.ENGLISH);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
                 LocalDate compleanno = null;
                 if (!compleannoStringa.isEmpty()) {
                     try {

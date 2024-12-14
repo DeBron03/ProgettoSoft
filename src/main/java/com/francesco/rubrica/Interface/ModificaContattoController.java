@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import com.francesco.rubrica.Main.App;
-import com.francesco.rubrica.Data.Rubrica;
+import com.francesco.rubrica.Data.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,8 +20,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import com.francesco.rubrica.Data.Contatto;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
+import static com.francesco.rubrica.Data.Contatto.isValidEmail;
+import static com.francesco.rubrica.Data.Contatto.isValidPhoneNumber;
+
 
 /**
  * @class ModificaContattoController
@@ -190,12 +193,33 @@ public class ModificaContattoController implements Initializable {
      * Metodo che gestisce la logica per salvare le modifiche apportate ai dettagli
      * di un contatto esistente.
      * @invariant Dopo l'esecuzione, i campi grafici e la rubrica devono essere sincronizzati.
-     * @see Rubrica#modificaContatto(Contatto vecchio, Contatto nuovo).
+     * @see Rubrica#modificaContatto(Contatto vecchio,Contatto nuovocontatto)
      */
     @FXML
     private void modificaContatto(ActionEvent event) {
         if (contatto == null) {
             System.out.println("Nessun contatto selezionato per la modifica.");
+            return;
+        }
+        if (!isValidPhoneNumber(numberField1.getText().trim()) ||
+                !isValidPhoneNumber(numberField2.getText().trim()) ||
+                !isValidPhoneNumber(numberField3.getText().trim())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Errore");
+            alert.setHeaderText("Numero di telefono non valido");
+            alert.setContentText("Inserisci un numero di telefono valido (10-15 cifre).");
+            alert.showAndWait();
+            return;
+        }
+
+        if (!isValidEmail(emailField1.getText().trim()) ||
+                !isValidEmail(emailField2.getText().trim()) ||
+                !isValidEmail(emailField3.getText().trim())) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Errore");
+            alert.setHeaderText("Email non valida");
+            alert.setContentText("Inserisci un'email valida.");
+            alert.showAndWait();
             return;
         }
         Contatto nuovocontatto= new Contatto(
@@ -211,7 +235,11 @@ public class ModificaContattoController implements Initializable {
                 addressField.getText().trim(),
                 birthdayField.getValue()
         );
-        App.getRubricaCondivisa().modificaContatto(contatto, nuovocontatto);
+        if (App.getRubricaCondivisa() != null) {
+                  App.getRubricaCondivisa().modificaContatto(contatto, nuovocontatto);
+              } else {
+                  System.out.println("Rubrica condivisa non trovata.");
+              }
 
         try {
 

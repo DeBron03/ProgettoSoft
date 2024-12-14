@@ -104,16 +104,12 @@ public class Contatto implements Comparable<Contatto>{
     }
 
 
-    private boolean isValidEmail(String email) {
-        return email == null || email.trim().isEmpty() || email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+    public static boolean isValidEmail(String email) {
+        return  email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$") || email == null || email.trim().isEmpty();
     }
 
-    private boolean isValidPhoneNumber(String telefono) {
-        if (telefono == null || telefono.trim().isEmpty()) {
-            return false;
-        }
-
-        return telefono.matches("^\\+?[0-9]{10,15}$");
+    public static boolean isValidPhoneNumber(String telefono) {
+        return telefono.matches("^\\+?[0-9]{10,15}$")|| telefono == null || telefono.trim().isEmpty();
     }
 
     /**
@@ -141,12 +137,37 @@ public class Contatto implements Comparable<Contatto>{
             this.nome = nome;
             this.cognome = cognome;
         }
-        this.telefono1 = telefono1;
-        this.telefono2 = telefono2;
-        this.telefono3 = telefono3;
-        this.email1 = email1;
-        this.email2 = email2;
-        this.email3 = email3;
+        if (isValidPhoneNumber(telefono1)) {
+            this.telefono1 = telefono1;
+        } else {
+            this.telefono1 = "";
+        }
+
+        if (isValidPhoneNumber(telefono2)) {
+            this.telefono2 = telefono2;
+        } else {
+            this.telefono2 = "";
+        }
+        if (isValidPhoneNumber(telefono3)) {
+            this.telefono3 = telefono3;
+        } else {
+            this.telefono3 = "";
+        }
+        if (isValidEmail(email1)) {
+            this.email1 = email1;
+        } else {
+            this.email1 = "";
+        }
+        if (isValidEmail(email2)) {
+            this.email2 = email2;
+        } else {
+            this.email2 = "";
+        }
+        if (isValidEmail(email3)) {
+            this.email3 = email3;
+        } else {
+            this.email3 = "";
+        }
         this.società = società;
         this.indirizzo = indirizzo;
         this.compleanno = compleanno;
@@ -161,25 +182,6 @@ public class Contatto implements Comparable<Contatto>{
         return telefono1;
     }
 
-    /**
-     * @brief Imposta il primo numero di telefono.
-     * @param telefono1 Primo numero di telefono da impostare.
-     */
-    public void setTelefono1(String telefono1) {
-        if (telefono1 == null) {
-            this.telefono1 = null;
-            return;
-        }
-        if (telefono1.trim().isEmpty()) {
-            throw new IllegalArgumentException("Il numero di telefono non può essere vuoto.");
-        }
-        if (!isValidPhoneNumber(telefono1)) {
-            throw new IllegalArgumentException("Telefono1 non valido. Deve contenere solo numeri e può includere un prefisso +.");
-        }
-        this.telefono1 = telefono1;
-
-
-    }
     /**
      * @brief Restituisce il cognome del contatto.
      * @return Stringa contenente il cognome.
@@ -247,17 +249,20 @@ public class Contatto implements Comparable<Contatto>{
      * @brief Imposta il secondo numero di telefono.
      * @param telefono2 Secondo numero di telefono da impostare.
      */
+
+    /**
+     * @brief Imposta il primo numero di telefono.
+     * @param telefono1 Primo numero di telefono da impostare.
+     */
+    public void setTelefono1(String telefono1) {
+        this.telefono1 = telefono1;
+    }
+
+    /**
+     * @brief Imposta il secondo numero di telefono.
+     * @param telefono2 Secondo numero di telefono da impostare.
+     */
     public void setTelefono2(String telefono2) {
-        if (telefono2 == null) {
-            this.telefono2 = null;
-            return;
-        }
-        if (telefono2.trim().isEmpty()) {
-            throw new IllegalArgumentException("Il numero di telefono non può essere vuoto.");
-        }
-        if (!isValidPhoneNumber(telefono2)) {
-            throw new IllegalArgumentException("Telefono2 non valido. Deve contenere solo numeri e può includere un prefisso +.");
-        }
         this.telefono2 = telefono2;
     }
     /**
@@ -265,16 +270,6 @@ public class Contatto implements Comparable<Contatto>{
      * @param telefono3 Terzo numero di telefono da impostare.
      */
     public void setTelefono3(String telefono3) {
-        if (telefono3 == null) {
-            this.telefono3 = null;
-            return;
-        }
-        if (telefono3.trim().isEmpty()) {
-            throw new IllegalArgumentException("Il numero di telefono non può essere vuoto.");
-        }
-        if (!isValidPhoneNumber(telefono3)) {
-            throw new IllegalArgumentException("Telefono3 non valido. Deve contenere solo numeri e può includere un prefisso +.");
-        }
         this.telefono3 = telefono3;
     }
     /**
