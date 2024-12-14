@@ -4,17 +4,9 @@
  * and open the template in the editor.
  */
 package com.francesco.rubrica.Interface;
-/**
- * @file VisualizzaSingoloContattoController.java
- * @brief Controller per la visualizzazione dei dettagli di un singolo contatto.
- *
- * Questo Interface.fxml.controller gestisce la visualizzazione dei dettagli di un contatto
- * selezionato dall'utente nell'interfaccia grafica di JavaFX.
- */
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import com.francesco.rubrica.Main.App;
 import com.francesco.rubrica.Data.Contatto;
 import com.francesco.rubrica.Data.Rubrica;
@@ -27,7 +19,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
@@ -35,7 +26,7 @@ import javafx.stage.Stage;
  * @brief Classe FXML Controller per visualizzare i dettagli di un singolo contatto.
  * @invariant Il contatto selezionato deve essere sempre valido (non null e con dati consistenti).
  * @invariant Tutti i campi grafici (es. `nameContent`, `surnameContent`, ecc.) devono essere inizializzati correttamente.
- * @invariant La lista `Contacts` deve essere sincronizzata con lo stato della rubrica.
+ * @invariant La visualizzazione del contatto deve essere sincronizzata con lo stato della rubrica.
  * Fornisce metodi per gestire l'interazione con i dettagli di un contatto selezionato
  * e permette di modificarlo, eliminarlo o tornare indietro.
  */
@@ -126,15 +117,13 @@ public class VisualizzaSingoloContattoController implements Initializable {
     private Button returnButton;
 
     /**
-     * @brief Lista osservabile contenente i contatti.
+     * @brief Oggetto `Contatto` che contiene i dati del contatto selezionato.
+     * @invariant `contatto` deve essere inizializzato prima di utilizzarlo nei metodi.
      */
-    @FXML
-    private ImageView photoContent;
-
     private Contatto contatto;
 
     /**
-     * @brief Inizializza il Interface.fxml.controller.
+     * @brief Inizializza Controller.
      * @param url URL per l'inizializzazione del Interface.fxml.controller.
      * @param rb ResourceBundle per la localizzazione.
      * @invariant Dopo l'inizializzazione, tutti i campi grafici devono essere non null.
@@ -145,7 +134,11 @@ public class VisualizzaSingoloContattoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
     }
-
+    /**
+     * @brief Imposta i dati del contatto da visualizzare.
+     * @param contatto Il contatto da visualizzare.
+     * @post I dettagli del contatto vengono visualizzati nei rispettivi campi.
+     */
     public void setContatto(Contatto contatto) {
         this.contatto = contatto;
         nameContent.setText(contatto.getNome());
@@ -160,6 +153,10 @@ public class VisualizzaSingoloContattoController implements Initializable {
         emailContent3.setText(contatto.getEmail3());
         addressContent.setText(contatto.getIndirizzo());
     }
+    /**
+     * @brief Aggiorna i dettagli del contatto visualizzato.
+     * @post I dettagli del contatto vengono aggiornati nei rispettivi campi.
+     */
     public void aggiornaDatiContatto() {
         if (contatto != null) {
             nameContent.setText(contatto.getNome());
@@ -176,24 +173,24 @@ public class VisualizzaSingoloContattoController implements Initializable {
         }
     }
     /**
-     * @throws IOException
-     * @brief Apre la finestra per modificare il contatto selezionato.
-     * @param event L'evento che ha scatenato l'azione(Il tasto "Modifica").
+     * @brief Chiude la finestra per tornare alla MainInterface.
+     * @param event L'evento che ha scatenato l'azione(Il tasto "X").
      * @pre L'utente ha selezionato un contatto della rubrica.
-     * @post Si apre l'interfaccia "ModificaContattoController.Interface.fxml"
-     * Metodo che permette all'utente di passare alla finestra di modifica
-     * del contatto attualmente visualizzato.
+     * @post Si chiude l'interfaccia "ModificaContattoController" per tornare alla"MainInterfaceController".
+     * Metodo che permette all'utente di passare alla finestra principale
+     * dal contatto attualmente visualizzato.
+     * @throws IOException
      */
     @FXML
     private void displayMainInterface(ActionEvent event) {
         try {
-            // Carica la scena principale
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/francesco/rubrica/MainInterfaceController.fxml"));
             Parent root = loader.load();
 
             Scene currentscene = ((javafx.scene.Node) event.getSource()).getScene();
             currentscene.setRoot(root);
-            // Recupera il controller della scena principale e passa i dati
+
            MainInterfaceController mainController = loader.getController();
             mainController.setRubrica(App.getRubricaCondivisa());
 
@@ -201,7 +198,16 @@ public class VisualizzaSingoloContattoController implements Initializable {
             System.out.println("Impossibile tornare alla MainInterface");
         }
     }
-
+    /**
+     *
+     * @brief Apre la finestra per modificare il contatto selezionato.
+     * @param event L'evento che ha scatenato l'azione(Il tasto "Modifica").
+     * @pre L'utente ha selezionato un contatto della rubrica.
+     * @post Si apre l'interfaccia "ModificaContatto"
+     * Metodo che permette all'utente di passare alla finestra di modifica
+     * del contatto attualmente visualizzato.
+     * @throws IOException
+     */
     @FXML
     public void displayModificaContatto(ActionEvent event) throws IOException {
         try {
@@ -218,27 +224,24 @@ public class VisualizzaSingoloContattoController implements Initializable {
             System.out.println("Impossibile aprire l'interfaccia ModificaContattoController");
         }
     }
-
     /**
      * @brief Elimina il contatto visualizzato.
-     * @param event L'evento che ha scatenato l'azione(Il tasto "Elimna").
-     * @pre L'utente ha selezionato un contatton in rubrica.
-     * @post Il contatto viene rimosso dalla rubrica e la lista dei contatti è aggiornata.
-     * Metodo che permette di eliminare il contatto attualmente selezionato
-     * dalla rubrica.
+     * @param event L'evento che ha scatenato l'azione(Il tasto "Elimina").
+     * @pre L'utente ha selezionato un contatto dalla rubrica.
+     * @post Il contatto viene rimosso dalla rubrica e la rubrica è aggiornata.
      * @see Rubrica#eliminaContatto(Contatto c).
      */
     @FXML
     public void eliminaContatto(ActionEvent event) {
         App.getRubricaCondivisa().eliminaContatto(contatto);
         try {
-            // Carica la scena principale
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/francesco/rubrica/MainInterfaceController.fxml"));
             Parent root = loader.load();
 
             Scene currentscene = ((javafx.scene.Node) event.getSource()).getScene();
             currentscene.setRoot(root);
-            // Recupera il controller della scena principale e passa i dati
+
             MainInterfaceController mainController = loader.getController();
             mainController.setRubrica(App.getRubricaCondivisa());
 

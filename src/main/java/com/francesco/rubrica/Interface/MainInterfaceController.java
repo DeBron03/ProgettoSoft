@@ -13,22 +13,9 @@ package com.francesco.rubrica.Interface;
  * di effettuare operazioni come ricerca, aggiunta, esportazione e importazione
  * dei contatti.
  */
-
-
-
-/**
- * @file MainInterfaceController.java
- * @brief Controller per la gestione dell'interfaccia principale della rubrica.
- *
- * Questa classe gestisce l'interfaccia principale della rubrica, permettendo
- * di effettuare operazioni come ricerca, aggiunta, esportazione e importazione
- * dei contatti.
- */
-
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import com.francesco.rubrica.Main.App;
 import com.francesco.rubrica.Data.Contatto;
 import com.francesco.rubrica.Data.Rubrica;
@@ -53,18 +40,11 @@ import javafx.stage.Stage;
  * @brief Controller per l'interfaccia principale della rubrica.
  * @invariant La rubrica "contatti" non deve mai essere null.
  * @invariant Tutti i campi annotati con @FXML devono essere inizializzati correttamente.
- * @invariant La lista Contacts deve sempre riflettere lo stato corrente della rubrica.
+ * @invariant La TableView<Contatto> rubrica deve sempre riflettere lo stato corrente della rubrica.
  * Questa classe fornisce i metodi per interagire con la rubrica tramite
  * l'interfaccia grafica (JavaFX).
  */
 public class MainInterfaceController implements Initializable {
-
-    /**
-     * @brief Istanza della rubrica che contiene i contatti.
-     * @invariant Non deve mai essere null.
-     */
-
-
     /**
      * @brief Campo di testo per la ricerca di contatti.
      */
@@ -108,14 +88,16 @@ public class MainInterfaceController implements Initializable {
     private TableColumn<Contatto, String> surnameClm;
 
     /**
-     * @brief Lista osservabile dei contatti visualizzati nella tabella.
+     * @brief Istanza della rubrica che contiene i contatti.
+     * @invariant Non deve mai essere null.
      */
-
     private Rubrica contatti;
 
+
+
     /**
-     * @brief Inizializza il Interface.fxml.controller.
-     * @param url URL per l'inizializzazione del Interface.fxml.controller.
+     * @brief Inizializza il Controller dell'interfaccia.
+     * @param url URL per l'inizializzazione del Controller.
      * @param rb ResourceBundle per la localizzazione.
      * @invariant Dopo l'inizializzazione, tutti i campi FXML devono essere non null.
      * Questo metodo viene chiamato automaticamente per inizializzare i componenti
@@ -131,45 +113,51 @@ public class MainInterfaceController implements Initializable {
         setupTableDoubleClickListener();
     }
 
+    /**
+     * @brief Imposta la rubrica per il controller.
+     * @param contatti Rubrica contenente i contatti.
+     * @invariant Non deve mai essere null.
+     */
+
     public void setRubrica(Rubrica contatti) {
         this.contatti = contatti;
     }
 
+    /**
+     * @brief Aggiorna la tabella dei contatti.
+     * @post La tabella viene aggiornata con la lista corrente dei contatti.
+     */
     private void aggiornaTabella() {
         rubrica.setItems(App.getRubricaCondivisa().getContatti());
         App.getRubricaCondivisa().ordina(App.getRubricaCondivisa().getContatti());
         rubrica.refresh();
-
     }
+
+    /**
+     * @brief Imposta un listener per il doppio clic nella tabella.
+     * @post Si abilita la selezione di un contatto per visualizzarne i dettagli.
+     */
     private void setupTableDoubleClickListener() {
         rubrica.setOnMouseClicked(new tableClick());
     }
 
     /**
      * @brief Esporta i contatti della rubrica.
-     * @param event L'evento che ha scatenato l'azione(Il tasto "esporta").
-     * @pre Deve esserci almeno un contatto nella rubrica (Contacts non è vuota).
+     * @param event L'evento che ha scatenato l'azione(Il tasto "Esporta Contatto").
+     * @pre La rubrica può essere sia vuota che occupata.
      * @post Viene generato un file esterno con i contatti esportati.
-     * Metodo che gestisce l'esportazione dei contatti in un file esterno.
      * @see Rubrica#esportaContatto(String filename)
      */
     @FXML
     public void esportaContatto(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
-
-
         File file = fileChooser.showSaveDialog(null);
-
-
         if (file != null) {
             try {
-
                 App.getRubricaCondivisa().esportaContatto(file.getAbsolutePath());
                 System.out.println("Contatti esportati con successo nel file: " + file.getAbsolutePath());
             } catch (IOException e) {
-
-
                 System.out.println("Errore durante l'esportazione del file.");
             }
         } else {
@@ -179,56 +167,39 @@ public class MainInterfaceController implements Initializable {
 
     /**
      * @brief Importa i contatti da un file esterno.
-     * @param event L'evento che ha scatenato l'azione.(Il tasto "importa")
+     * @param event L'evento che ha scatenato l'azione.(Il tasto "Importa Contatto")
      * @pre L'utente ha un fle, supportato dall'app, contenente i contatti.
      * @post I contatti vengono importati correttamente e la rubrica viene aggiornata.
-     * Metodo che gestisce l'importazione di contatti da un file esterno.
      * @see Rubrica#importaContatto(String filename)
      */
     @FXML
     public void importaContatto(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
-
-        // Mostra la finestra di dialogo per la selezione del file
         File file = fileChooser.showOpenDialog(null);
-
-        // Se l'utente ha selezionato un file
         if (file != null) {
             try {
-
                 contatti.importaContatto(file.getAbsolutePath());
-
-
                 System.out.println("Contatti importati con successo dalla rubrica " + contatti.getContatti());
                 aggiornaTabella();
             } catch (IOException e) {
-
-
                 System.out.println("Errore durante l'importazione del file.");
             }
         } else {
             System.out.println("Operazione di importazione annullata.");
         }
     }
-
-
-
-
     /**
      * @brief Apre la finestra per aggiungere un nuovo contatto.
      * @param event L'evento che ha scatenato l'azione(Il tasto "+").
      * @pre L'utente ha selezionato "+" per aggiungere il contatto.
-     * @post Si apre l'interfaccia "AggiuntaContattoController.Interface.fxml"
-     * Metodo che cambia la scena per permettere l'aggiunta di un nuovo contatto.
-     * Il parametro event può essere usato per gestire dinamicamente la transizione.
+     * @post Si apre l'interfaccia per l'aggiunta di un contatto.
      * @see AggiuntaContattoController
      */
     @FXML
     public void displayAggiungiContatto(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/francesco/rubrica/AggiuntaContattoController.fxml"));
         Parent root = loader.load();
-
         Scene currentScene = ((javafx.scene.Node) event.getSource()).getScene();
         currentScene.setRoot(root);
         AggiuntaContattoController controller = loader.getController();
@@ -237,14 +208,12 @@ public class MainInterfaceController implements Initializable {
         Stage stage = (Stage) currentScene.getWindow();
         stage.setOnHidden(e -> aggiornaTabella());
     }
+
     /**
      * @brief Apre la finestra per visualizzare un contatto selezionato.
      * @pre L'utente ha selezionato un contatto nella rubrica.
      * @post Si apre l'interfaccia "VisualizzaSingoloContatto.Interface.fxml"
-     * Metodo che cambia la scena per visualizzare i dettagli di un contatto.
-     * Può essere utilizzato per navigare verso una vista dettagliata.
      * @see VisualizzaSingoloContattoController
-     *
      */
     private class tableClick implements javafx.event.EventHandler<javafx.scene.input.MouseEvent> {
         @Override
@@ -256,7 +225,6 @@ public class MainInterfaceController implements Initializable {
                     try {
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/francesco/rubrica/VisualizzaSingoloContattoController.fxml"));
                         Parent root = loader.load();
-
                         Scene currentScene = ((javafx.scene.Node) event.getTarget()).getScene();
                         currentScene.setRoot(root);
                         System.out.println("Hai premuto il pulsante per visualizzare i dettagli di"+ " "+ contattoSelezionato.getNome() + " " + contattoSelezionato.getCognome() + ".");
@@ -275,17 +243,5 @@ public class MainInterfaceController implements Initializable {
             }
         }
     }
-
-
-    /**
-     * @brief Effettua una ricerca di contatti nella rubrica.
-     * @param event L'evento che ha scatenato l'azione(Utente scrive nella barra di ricerca).
-     * @pre L'utente clicca sulla barra di ricerca
-     * @post La tabella mostra i contatti che corrispondono ai criteri di ricerca
-     * Metodo che filtra i contatti visualizzati nella tabella in base al testo
-     * inserito nel campo di ricerca.
-     * @see Rubrica#ricercaContatto(String s)
-     */
-
-    }
+}
 

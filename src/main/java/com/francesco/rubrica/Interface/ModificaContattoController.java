@@ -5,18 +5,11 @@
  */
 package com.francesco.rubrica.Interface;
 
-/**
- * @file ModificaContattoController.java
- * @brief Controller per la gestione della modifica di un contatto nell'interfaccia grafica.
- *
- * Questo Interface.fxml.controller permette agli utenti di modificare i dettagli di un contatto
- * già esistente nella rubrica utilizzando JavaFX.
- */
+
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import com.francesco.rubrica.Main.App;
 import com.francesco.rubrica.Data.Rubrica;
 import javafx.fxml.FXML;
@@ -34,7 +27,7 @@ import javafx.event.ActionEvent;
  * @class ModificaContattoController
  * @brief Classe FXML Controller per la gestione della modifica dei contatti.
  * @invariant Tutti i campi annotati con `@FXML` devono essere inizializzati correttamente.
- * @invariant La lista `Contacts` deve essere non null e sincronizzata con lo stato della rubrica.
+ * @invariant Il contatto "Contatto" non deve essere non null e sincronizzato con lo stato della rubrica.
  * Gestisce i campi di input e i pulsanti relativi alla modifica di un contatto
  * nella rubrica.
  */
@@ -118,11 +111,21 @@ public class ModificaContattoController implements Initializable {
     @FXML
     private Button delButton;
 
+    /**
+     * @brief Rappresenta il contatto che viene modificato.
+     * Questa variabile memorizza l'oggetto `Contatto` corrente che è stato selezionato
+     * dall'utente per essere modificato. Viene utilizzata per popolare i campi di input
+     * con i dati esistenti del contatto, e per salvarne i nuovi dati una volta completata
+     * la modifica.
+     * @invariant `contatto` non deve essere null quando viene utilizzato, altrimenti non sarà possibile
+     * salvare le modifiche.
+     */
     private Contatto contatto;
 
+
     /**
-     * @brief Inizializza il Interface.fxml.controller.
-     * @param url URL per l'inizializzazione del Interface.fxml.controller.
+     * @brief Inizializza il Controller.
+     * @param url URL per l'inizializzazione del Controller.
      * @param rb ResourceBundle per la localizzazione.
      * @invariant Dopo l'inizializzazione, tutti i campi FXML devono essere non null.
      * Questo metodo viene chiamato automaticamente per inizializzare i componenti
@@ -133,6 +136,11 @@ public class ModificaContattoController implements Initializable {
 
     }
 
+    /**
+     * @brief Imposta il contatto da modificare nei campi di input.
+     * @param contatto Il contatto da modificare.
+     * @post I campi di input vengono popolati con i dati del contatto selezionato.
+     */
     public void setContatto(Contatto contatto) {
         this.contatto = contatto;
         nameField.setText(contatto.getNome());
@@ -152,24 +160,23 @@ public class ModificaContattoController implements Initializable {
     /**
      * @brief Annulla la modifica del contatto.
      * @param event L'evento che ha scatenato l'azione(Il tasto "annulla").
-     *  @pre L'utente Deve aver eseguito l'operazione di modifica.
-     * @post L'utente torna alla `MainInterface` senza salvare le modifiche apportate.
+     *  @pre L'utente deve aver eseguito l'operazione di modifica.
+     * @post L'utente torna alla visualizzazione precedente senza salvare le modifiche apportate.
      * Metodo che gestisce la logica per annullare le modifiche apportate ai dettagli
      * di un contatto e torna alla visualizzazione precedente.
      */
     @FXML
     public void annulla(ActionEvent event) {
         try {
-            // Carica la scena principale
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/francesco/rubrica/VisualizzaSingoloContattoController.fxml"));
             Parent root = loader.load();
 
             Scene currentscene = ((javafx.scene.Node) event.getSource()).getScene();
             currentscene.setRoot(root);
-            // Recupera il controller della scena principale e passa i dati
+
             VisualizzaSingoloContattoController controller = loader.getController();
             controller.setContatto(contatto);
-
         } catch (IOException e) {
            System.out.println("Impossibile annullare l'operazione corrente");
         }
@@ -177,12 +184,12 @@ public class ModificaContattoController implements Initializable {
 
     /**
      * @brief Salva le modifiche apportate al contatto.
-     * @param event L'evento che ha scatenato l'azione(Il tasto "Salva").
+     * @param event L'evento che ha scatenato l'azione(Il tasto "Salva Modifiche").
      * @pre  L'utente seleziona un contatto nella rubrica, clicca il tasto modifica e visualizza le informazioni del contatto.
      * @post Il contatto modificato è salvato nella rubrica e la lista grafica viene aggiornata.
      * Metodo che gestisce la logica per salvare le modifiche apportate ai dettagli
      * di un contatto esistente.
-     * @invariant Dopo l'esecuzione, i campi grafici e la lista `Contacts` devono essere sincronizzati.
+     * @invariant Dopo l'esecuzione, i campi grafici e la rubrica devono essere sincronizzati.
      * @see Rubrica#modificaContatto(Contatto vecchio, Contatto nuovo).
      */
     @FXML
@@ -207,13 +214,12 @@ public class ModificaContattoController implements Initializable {
         App.getRubricaCondivisa().modificaContatto(contatto, nuovocontatto);
 
         try {
-            // Carica la scena principale
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/francesco/rubrica/VisualizzaSingoloContattoController.fxml"));
             Parent root = loader.load();
-
             Scene currentscene = ((javafx.scene.Node) event.getSource()).getScene();
             currentscene.setRoot(root);
-            // Recupera il controller della scena principale e passa i dati
+
             VisualizzaSingoloContattoController controller = loader.getController();
             controller.setContatto(nuovocontatto);
         } catch (IOException e) {
