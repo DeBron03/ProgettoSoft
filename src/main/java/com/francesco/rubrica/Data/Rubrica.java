@@ -5,25 +5,12 @@
  */
 package com.francesco.rubrica.Data;
 
-/**
- *
- * @author lucac
- */
-/**
- * @file Rubrica.java
- * @brief Classe per la gestione della rubrica dei contatti.
- * @invariant La lista contatti non deve mai essere null.
- * @invariant Non ci devono essere duplicati nella lista contatti.
- * @invariant Ogni contatto nella lista contatti deve essere valido.
- * La classe Rubrica fornisce metodi per aggiungere, visualizzare, cercare,
- * modificare, esportare, importare ed eliminare contatti, oltre a supportare
- * l'annullamento di operazioni.
- */
+
+
+
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -35,59 +22,62 @@ import java.util.Locale;
 
 /**
  * @class Rubrica
- * @brief Classe che rappresenta una rubrica per la gestione dei contatti.
- *
- * Questa classe contiene una lista di contatti e fornisce metodi per la gestione
- * e la manipolazione dei contatti.
+ * @brief Classe per la gestione della rubrica dei contatti.
+ * @invariant Ogni contatto nella lista contatti deve essere valido.
+ * @invariant La lista dei contatti non deve mai essere null.
+ * La classe Rubrica fornisce metodi per aggiungere, ordinare, cercare,
+ * modificare, esportare, importare ed eliminare contatti.
  */
 public class Rubrica {
+
     /**
      * @brief Lista che contiene tutti i contatti della rubrica.
      * @invariant La lista deve essere sempre inizializzata e non può mai essere null.
      */
-    private ObservableList<Contatto> contatti;
-
+    private final ObservableList<Contatto> contatti;
 
     /**
      * @brief Costruttore per inizializzare una rubrica vuota.
+     * @post La lista dei contatti è inizializzata e vuota.
      */
     public Rubrica(){
         this.contatti = FXCollections.observableArrayList();
-
-
     }
 
     /**
-     * @param contatto Il contatto da aggiungere.
-     * @brief Aggiunge un nuovo contatto alla rubrica.
-     * @invariant Dopo l'aggiunta, la lista non deve contenere duplicati.
-     * @invariant Il contatto aggiunto deve essere valido(aggiunta di un nome o un cognome).
+     * @brief Restituisce la lista dei contatti.
+     * @return La lista osservabile dei contatti.
      */
-    public void aggiungiContatto(Contatto contatto) {
-        if (contatto == null) {
-            throw new IllegalArgumentException("Il contatto non può essere null.");
-        }
-        this.contatti.add(contatto); // contatti è la lista osservabile
-    }
-
-
     public ObservableList<Contatto> getContatti() {
         return contatti;
     }
 
 
     /**
+     * @brief Aggiunge un nuovo contatto alla rubrica.
+     * @pre Il contatto non deve essere null.
+     * @post Il contatto è aggiunto alla lista dei contatti se è valido.
+     * @param contatto Il contatto da aggiungere.
+     * @invariant Il contatto aggiunto deve essere valido (nome o cognome presenti).
+     */
+    public void aggiungiContatto(Contatto contatto) {
+        if (contatto == null) {
+            throw new IllegalArgumentException("Il contatto non può essere null.");
+        }
+        this.contatti.add(contatto);
+    }
+
+    /**
+     * @brief Cerca i contatti nella rubrica in base a una stringa.
      * @param s Stringa con cui ricercare corrispondenze nella Lista.
+     * @pre La stringa di ricerca può essere null o vuota (in tal caso restituisce tutti i contatti).
+     * @post Restituisce una lista filtrata dei contatti che corrispondono ai criteri di ricerca.
      * @return Una lista di contatti che corrispondono ai criteri di ricerca.
-     * <p>
-     * Metodo da implementare per filtrare i contatti in base a criteri specifici.
-     * @brief Cerca i contatti nella rubrica.
      */
     public ObservableList<Contatto> ricercaContatto(String s) {
         if (s == null || s.isEmpty()) {
             return contatti;
         }
-
         ObservableList<Contatto> risultati= FXCollections.observableArrayList();
         for (Contatto contatto : contatti) {
             if (contatto.getNome().toLowerCase().startsWith(s.toLowerCase()) ||
@@ -95,19 +85,20 @@ public class Rubrica {
                 risultati.add(contatto);
             }
         }
-
-        return risultati; // Restituisce solo i risultati trovati
+        return risultati;
     }
 
     /**
-     * @brief Esporta i contatti della rubrica.
-     * <p>
-     * Metodo da implementare per esportare i contatti in un formato specifico
+     * @brief Esporta i contatti della rubrica in un file CSV.
+     * @pre La lista dei contatti può essere sia vuota che occupata da contatti.
+     * @post Il file specificato contiene i contatti esportati.
+     * @param filename Il nome del file in cui esportare i contatti.
+     * @throws IOException Se si verifica un errore durante l'esportazione.
      */
     public void esportaContatto(String filename) throws IOException {
 
         try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(filename)))) {
-            // 1. Scrive l'intestazione delle colonne nel file CSV
+
             pw.println("NOME; COGNOME; TELEFONO 1; TELEFONO 2; TELEFONO 3; EMAIL1; EMAIL2; EMAIL3; SOCIETA'; INDIRIZZO; COMPLEANNO");
             for (Contatto s : contatti) {
 
@@ -123,43 +114,33 @@ public class Rubrica {
                 pw.print(s.getIndirizzo() + ";");
                 if (s.getCompleanno() != null)
                     pw.println((s.getCompleanno()));
-                else pw.println("" + ";");
+                else pw.println(" " + ";");
             }
-
-
         } catch (IOException e) {
-
             throw new IOException("Errore durante l'esportazione dei contatti.");
         }
     }
 
     /**
-     * @brief Importa contatti nella rubrica.
-     * @invariant I contatti importati devono essere validi e non devono introdurre duplicati.
-     * Metodo da implementare per importare contatti da un formato specifico
+     * @brief Importa contatti da un file CSV.
+     * @pre Il file deve esistere e seguire il formato corretto.
+     * @post I contatti validi sono aggiunti alla rubrica.
+     * @param filename Il nome del file da cui importare i contatti.
+     * @throws IOException Se si verifica un errore durante l'importazione.
      */
     public void importaContatto(String filename) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
-
-            // Leggi la prima riga (intestazione) e ignorala
             line = reader.readLine();
             System.out.println("Intestazione ignorata: " + line);
-
-            // Leggi le righe successive contenenti i contatti
             while ((line = reader.readLine()) != null) {
-                // Se la riga è vuota o malformata, la ignoro
+
                 if (line.isEmpty() || !line.contains(";")) {
                     continue;
                 }
-
-                // Stampa la riga per il debug
                 System.out.println("Riga letta: " + line);
-
-                // Split dei campi della riga
                 String[] fields = line.split(";");
 
-                // Estrazione dei campi dal CSV
                 String nome = fields[0].trim();
                 String cognome = fields[1].trim();
                 String telefono1 = fields[2].trim().isEmpty() ? " " : fields[2].trim();
@@ -172,14 +153,11 @@ public class Rubrica {
                 String indirizzo = fields[9].trim().isEmpty() ? " " : fields[9].trim();
                 String compleannoStringa = fields[10].trim();
 
-
-                // Verifica che almeno nome o cognome non siano vuoti
                 if (nome.isEmpty() && cognome.isEmpty()) {
                     System.out.println("Contatto ignorato: manca sia il nome che il cognome.");
-                    continue; // Salta il contatto se entrambi sono vuoti
+                    continue;
                 }
 
-                // Gestione del formato della data
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd", Locale.ENGLISH);
                 LocalDate compleanno = null;
                 if (!compleannoStringa.isEmpty()) {
@@ -189,19 +167,13 @@ public class Rubrica {
                         System.out.println("Formato data non valido per: " + compleannoStringa);
                     }
                 }
-
-                // Creazione del nuovo contatto
                 Contatto nuovoContatto = new Contatto(
                         nome, cognome, telefono1, telefono2, telefono3,
                         email1, email2, email3, società, indirizzo, compleanno
                 );
-
-                // Aggiungi il contatto alla lista
                 this.contatti.add(nuovoContatto);
             }
-
             System.out.println("Contatti importati con successo.");
-
         } catch (IOException e) {
             System.out.println("Errore durante la lettura del file: " + e.getMessage());
         }
@@ -209,9 +181,10 @@ public class Rubrica {
 
 
     /**
-     * @param c Contatto da Eliminare nella Lista.
-     *          Metodo da implementare per rimuovere un contatto specifico dalla lista.
      * @brief Elimina un contatto dalla rubrica.
+     * @pre Il contatto deve esistere nella lista.
+     * @post Il contatto è rimosso dalla lista.
+     * @param c Il contatto da eliminare.
      */
     public void eliminaContatto(Contatto c) {
         contatti.remove(c);
@@ -219,17 +192,22 @@ public class Rubrica {
     }
 
     /**
-     * @param contattoOriginale,nuoviDati Contatto da Modificare nella Lista.
      * @brief Modifica un contatto esistente nella rubrica.
-     * @invariant Dopo la modifica, il contatto deve rimanere valido.
-     * Metodo da implementare per aggiornare i dettagli di un contatto esistente.
+     * @pre Il contatto originale deve esistere nella lista.
+     * @post I dettagli del contatto sono aggiornati.
+     * @param contattoOriginale Il contatto da modificare.
+     * @param nuoviDati Il nuovo contatto con i dati aggiornati.
      */
     public void modificaContatto(Contatto contattoOriginale, Contatto nuoviDati) {
         int index = contatti.indexOf(contattoOriginale);
         contatti.set(index, nuoviDati);
-        System.out.println("Contatto modificato con successo alla poszione" + " " + index);
+        System.out.println("Contatto modificato con successo alla indice" + " " + index);
     }
-
+    /**
+     * @brief Ordina la lista dei contatti.
+     * @param contatti La lista di contatti da ordinare.
+     * @see Collections#sort(List)
+     */
     public void ordina (List<Contatto> contatti) {
         Collections.sort(contatti);
     }

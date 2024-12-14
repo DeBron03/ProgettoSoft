@@ -5,17 +5,9 @@
  */
 package com.francesco.rubrica.Interface;
 
-/**
- * @file AggiuntaContattoController.java
- * @brief Controller per la gestione dell'aggiunta di un contatto nell'interfaccia grafica.
- *
- * Questo Interface.fxml.controller gestisce l'interfaccia grafica per l'aggiunta di un nuovo contatto
- * alla rubrica utilizzando JavaFX.
- */
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import com.francesco.rubrica.Main.App;
 import com.francesco.rubrica.Data.Contatto;
 import com.francesco.rubrica.Data.Rubrica;
@@ -30,14 +22,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
-
 /**
  * @class AggiuntaContattoController
  * @brief Classe FXML Controller per la gestione dell'aggiunta dei contatti.
+ * Questo Controller gestisce l'interfaccia grafica per l'aggiunta di un nuovo contatto
+ * alla rubrica utilizzando JavaFX.
  * @invariant Tutti i campi FXML associati (es. nameField, surnameField, ecc.) devono essere inizializzati correttamente.
- * @invariant La lista osservabile Contacts deve essere non null e riflettere correttamente i contatti attuali.
- * Gestisce i campi di input e i pulsanti relativi all'aggiunta di un nuovo contatto
- * nella rubrica.
  */
 public class AggiuntaContattoController implements Initializable {
 
@@ -120,41 +110,42 @@ public class AggiuntaContattoController implements Initializable {
     private Button delButton;
 
     /**
-     * @brief Lista osservabile contenente i contatti.
+     * @brief Rubrica che viene aggiornata dopo le operazioni .
      */
 
     private Rubrica rubrica;
 
     /**
-     * @brief Inizializza il Interface.fxml.controller.
-     * @param url URL per inizializzare il Interface.fxml.controller.
+     * @brief Imposta la rubrica condivisa.
+     * @param rubrica L'istanza della rubrica da impostare.
+     */
+    public void setRubrica(Rubrica rubrica) {
+        this.rubrica = rubrica;
+    }
+
+    /**
+     * @brief Inizializza il Controller.
+     * @param url URL per inizializzare il Controller.
      * @param rb ResourceBundle per localizzazione.
      * @invariant Dopo l'inizializzazione, tutti i campi FXML associati devono essere non null.
-     * Questo metodo viene chiamato automaticamente all'avvio per inizializzare
-     * i componenti FXML.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.rubrica=new Rubrica();
+        this.rubrica=App.getRubricaCondivisa();
     }
     /**
      * @brief Aggiunge un nuovo contatto alla rubrica.
-     * @param event L'evento che ha scatenato l'azione(Il tasto "Fine").
-     * @pre  I campi "nameField" e "surnameField" devono essere compilati. Gli altri campi possono essere vuoti.
-     * @post Un nuovo contatto valido è aggiunto alla lista Contacts e visualizzato
-     *       nella lista grafica.
-     * Metodo che gestisce la logica per l'aggiunta di un contatto alla rubrica.
-     *
+     * @param event L'evento che ha scatenato l'azione(Il tasto "Aggiungi").
+     * @pre  Uno tra i campi "nameField" e "surnameField" deve essere compilato. Gli altri campi possono essere vuoti.
+     * @post Un nuovo contatto valido è aggiunto alla rubrica.
      * @see Rubrica#aggiungiContatto(Contatto)
-     * @invariant Dopo l'esecuzione, la lista Contacts deve riflettere lo stato aggiornato.
+     * @invariant Dopo l'esecuzione, si ritorna nella MainInterface con la rubrica aggiornata.
      */
 
     @FXML
     public void aggiungiContatto(ActionEvent event) {
         String nome = nameField.getText().trim();
         String cognome = surnameField.getText().trim();
-
-
         LocalDate compleanno = birthdayField.getValue();
         String società = companyField.getText().trim();
         String telefono1 = numberField1.getText().trim();
@@ -165,22 +156,19 @@ public class AggiuntaContattoController implements Initializable {
         String email3 = emailField3.getText().trim();
         String indirizzo = addressField.getText().trim();
 
-
         Contatto nuovoContatto = new Contatto(
                 nome, cognome, telefono1, telefono2, telefono3, email1, email2, email3, società, indirizzo, compleanno);
 
-        rubrica.aggiungiContatto(nuovoContatto);
+        App.getRubricaCondivisa().aggiungiContatto(nuovoContatto);
         System.out.println("Hai aggiunto"+" "+ nuovoContatto.getNome() +" "+ nuovoContatto.getCognome() +" alla rubrica." );
 
         pulisciCampi();
         try {
-            // Carica la scena principale
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/francesco/rubrica/MainInterfaceController.fxml"));
             Parent root = loader.load();
-
             Scene currentscene = ((javafx.scene.Node) event.getSource()).getScene();
             currentscene.setRoot(root);
-            // Recupera il controller della scena principale e passa i dati
             MainInterfaceController mainController = loader.getController();
             mainController.setRubrica(App.getRubricaCondivisa());
 
@@ -190,27 +178,23 @@ public class AggiuntaContattoController implements Initializable {
     }
 
     /**
-     * @brief Annulla l'operazione corrente.
+     * @brief Annulla l'operazione di aggiunta.
      * @param event L'evento che ha scatenato l'azione(Il tasto "Annulla").
      * @pre L'utente deve essere in fase di aggiunta di un nuovo contatto.
      * @post L'interfaccia torna alla MainInterface senza salvare il nuovo contatto.
-     * Metodo che gestisce la logica per annullare l'aggiunta di un contatto.
-     * @see annulla()
      */
-
-
     @FXML
     public void annulla (ActionEvent event) {
         pulisciCampi();
         System.out.println("Annullata l'aggiunta di un nuovo contatto.Torno alla MainInterface.");
         try {
-            // Carica la scena principale
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/francesco/rubrica/MainInterfaceController.fxml"));
             Parent root = loader.load();
 
             Scene currentscene = ((javafx.scene.Node) event.getSource()).getScene();
             currentscene.setRoot(root);
-            // Recupera il controller della scena principale e passa i dati
+
             MainInterfaceController mainController = loader.getController();
             mainController.setRubrica(App.getRubricaCondivisa());
 
@@ -220,10 +204,6 @@ public class AggiuntaContattoController implements Initializable {
 
 
     }
-    public void setRubrica(Rubrica rubrica) {
-        this.rubrica = rubrica;
-    }
-
 
     /**
      * @brief Pulisce i campi di input del form.
