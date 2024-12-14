@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane hgap="10" prefHeight="934.0" prefWidth="903.0" style="-fx-padding: 20;" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.francesco.rubrica.Interface.ModificaContattoController">
+   <columnConstraints>
+      <ColumnConstraints percentWidth="50.0" />
+      <ColumnConstraints percentWidth="50.0" />
+      <ColumnConstraints percentWidth="50.0" />
+   </columnConstraints>
+   <children>
+      <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+      <Label fx:id="nameContent" prefHeight="27.0" prefWidth="280.0" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+      <Label text="Cognome:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+      <Label fx:id="surnameContent" prefHeight="27.0" prefWidth="596.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+      <Label text="Data di Nascita:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+      <Label fx:id="birthdayContent" prefHeight="27.0" prefWidth="622.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+      <Label text="Azienda:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+      <Label fx:id="companyContent" prefHeight="27.0" prefWidth="587.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+      <Label text="Telefono 1:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+      <Label fx:id="numberContent1" prefHeight="27.0" prefWidth="705.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+      <Label text="Telefono 2:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+      <Label fx:id="numberContent2" prefHeight="27.0" prefWidth="702.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+      <Label text="Telefono 3:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+      <Label fx:id="numberContent3" prefHeight="27.0" prefWidth="653.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+      <Label text="Email 1:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+      <Label fx:id="emailContent1" prefHeight="27.0" prefWidth="686.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="7" />
+      <Label text="Email 2:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+      <Label fx:id="emailContent2" prefHeight="27.0" prefWidth="650.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="8" />
+      <Label text="Email 3:" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+      <Label fx:id="emailContent3" prefHeight="27.0" prefWidth="887.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="9" />
+      <HBox alignment="CENTER" prefHeight="0.0" prefWidth="863.0" spacing="10" GridPane.columnSpan="2147483647" GridPane.rowIndex="11">
+         <children>
+            <Button fx:id="modifyButton" onAction="#displayModificaContatto" text="Modifica" />
+            <Button fx:id="deleteButton" onAction="#eliminaContatto" text="Elimina" />
+         </children>
+      </HBox>
+      <Label text="Indirizzo:" GridPane.rowIndex="10" />
+      <Label fx:id="addressContent" prefHeight="27.0" prefWidth="734.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="10" />
+      <HBox alignment="TOP_RIGHT" prefHeight="0.0" prefWidth="281.0" GridPane.columnIndex="2">
+         <children>
+            <Button fx:id="returnButton" alignment="TOP_RIGHT" onAction="#displayMainInterface" prefHeight="39.0" prefWidth="0.0" text="X" />
+         </children>
+      </HBox>
+   </children>
+</GridPane>
