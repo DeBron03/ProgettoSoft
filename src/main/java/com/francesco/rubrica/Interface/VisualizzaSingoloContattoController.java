@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.francesco.rubrica;
+package com.francesco.rubrica.Interface;
 /**
  * @file VisualizzaSingoloContattoController.java
  * @brief Controller per la visualizzazione dei dettagli di un singolo contatto.
@@ -14,7 +14,10 @@ package com.francesco.rubrica;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.ObservableList;
+
+import com.francesco.rubrica.Main.App;
+import com.francesco.rubrica.Data.Contatto;
+import com.francesco.rubrica.Data.Rubrica;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -125,6 +128,8 @@ public class VisualizzaSingoloContattoController implements Initializable {
     /**
      * @brief Lista osservabile contenente i contatti.
      */
+    @FXML
+    private ImageView photoContent;
 
     private Contatto contatto;
 
@@ -155,7 +160,21 @@ public class VisualizzaSingoloContattoController implements Initializable {
         emailContent3.setText(contatto.getEmail3());
         addressContent.setText(contatto.getIndirizzo());
     }
-
+    public void aggiornaDatiContatto() {
+        if (contatto != null) {
+            nameContent.setText(contatto.getNome());
+            surnameContent.setText(contatto.getCognome());
+            birthdayContent.setText(contatto.getCompleanno() != null ? contatto.getCompleanno().toString() : "");
+            companyContent.setText(contatto.getSocietà());
+            numberContent1.setText(contatto.getTelefono1());
+            numberContent2.setText(contatto.getTelefono2());
+            numberContent3.setText(contatto.getTelefono3());
+            emailContent1.setText(contatto.getEmail1());
+            emailContent2.setText(contatto.getEmail2());
+            emailContent3.setText(contatto.getEmail3());
+            addressContent.setText(contatto.getIndirizzo());
+        }
+    }
     /**
      * @throws IOException
      * @brief Apre la finestra per modificare il contatto selezionato.
@@ -194,7 +213,7 @@ public class VisualizzaSingoloContattoController implements Initializable {
         ModificaContattoController controller = loader.getController();
         controller.setContatto(this.contatto);
         Stage stage = (Stage) currentScene.getWindow();
-        stage.setOnHidden(e -> setContatto(this.contatto));
+        stage.setOnHidden(e -> aggiornaDatiContatto());
         } catch (IOException e) {
             System.out.println("Impossibile aprire l'interfaccia ModificaContattoController");
         }

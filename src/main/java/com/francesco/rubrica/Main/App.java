@@ -1,5 +1,7 @@
-package com.francesco.rubrica;
+package com.francesco.rubrica.Main;
 
+import com.francesco.rubrica.Data.Rubrica;
+import com.francesco.rubrica.Interface.MainInterfaceController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

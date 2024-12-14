@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.francesco.rubrica;
+package com.francesco.rubrica.Interface;
 
 /**
  * @file MainInterfaceController.java
@@ -28,6 +28,10 @@ package com.francesco.rubrica;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.francesco.rubrica.Main.App;
+import com.francesco.rubrica.Data.Contatto;
+import com.francesco.rubrica.Data.Rubrica;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;

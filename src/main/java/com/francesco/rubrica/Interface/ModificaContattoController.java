@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.francesco.rubrica;
+package com.francesco.rubrica.Interface;
 
 /**
  * @file ModificaContattoController.java
@@ -16,7 +16,9 @@ package com.francesco.rubrica;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.ObservableList;
+
+import com.francesco.rubrica.Main.App;
+import com.francesco.rubrica.Data.Rubrica;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,10 +27,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import com.francesco.rubrica.Contatto;
+import com.francesco.rubrica.Data.Contatto;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
-import javafx.stage.Stage;
 
 /**
  * @class ModificaContattoController

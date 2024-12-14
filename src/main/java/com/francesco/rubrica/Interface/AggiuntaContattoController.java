@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.francesco.rubrica;
+package com.francesco.rubrica.Interface;
 
 /**
  * @file AggiuntaContattoController.java
@@ -16,20 +16,19 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.francesco.rubrica.Main.App;
+import com.francesco.rubrica.Data.Contatto;
+import com.francesco.rubrica.Data.Rubrica;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import java.time.LocalDate;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-
-
 
 
 /**
@@ -196,6 +195,7 @@ public class AggiuntaContattoController implements Initializable {
      * @pre L'utente deve essere in fase di aggiunta di un nuovo contatto.
      * @post L'interfaccia torna alla MainInterface senza salvare il nuovo contatto.
      * Metodo che gestisce la logica per annullare l'aggiunta di un contatto.
+     * @see annulla()
      */
 
 

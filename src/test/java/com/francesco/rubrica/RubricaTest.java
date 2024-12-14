@@ -1,9 +1,9 @@
 package com.francesco.rubrica;
 
+import com.francesco.rubrica.Data.Contatto;
+import com.francesco.rubrica.Data.Rubrica;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 

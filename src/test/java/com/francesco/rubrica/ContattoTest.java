@@ -1,5 +1,6 @@
 package com.francesco.rubrica;
 
+import com.francesco.rubrica.Data.Contatto;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
