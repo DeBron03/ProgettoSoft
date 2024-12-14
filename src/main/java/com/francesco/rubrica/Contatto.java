@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package data;
+package com.francesco.rubrica;
 
 /**
  *
@@ -13,7 +13,7 @@ package data;
  * @file Contatto.java
  * @brief Rappresenta un contatto nella rubrica.
  *
- * La classe `Contatto` modella i dettagli di un contatto, includendo
+ * La classe Contatto modella i dettagli di un contatto, includendo
  * informazioni personali, numeri di telefono, email, azienda e indirizzo.
  */
 
@@ -91,6 +91,7 @@ public class Contatto implements Comparable<Contatto>{
      */
     private LocalDate compleanno;
 
+
     //Costruttore essenziale
     public Contatto(String nome, String cognome) {
         if ((nome == null || nome.isEmpty()) && (cognome == null || cognome.isEmpty())) {
@@ -102,11 +103,15 @@ public class Contatto implements Comparable<Contatto>{
 
     // Validazione email
     private boolean isValidEmail(String email) {
-        return email != null && email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+        return email == null || email.trim().isEmpty() || email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
     }
     //Validazione numeri di telefono
     private boolean isValidPhoneNumber(String telefono) {
-        return telefono == null || telefono.matches("^\\+?[0-9]{10,15}$");
+        if (telefono == null || telefono.trim().isEmpty()) {
+            return false; // Non valido se nullo o vuoto
+        }
+        // Controlla se rispetta il formato corretto
+        return telefono.matches("^\\+?[0-9]{10,15}$");
     }
 
     /**
@@ -144,6 +149,7 @@ public class Contatto implements Comparable<Contatto>{
         this.società = società;
         this.indirizzo = indirizzo;
         this.compleanno = compleanno;
+
     }
 
     // Metodi getter e setter con documentazione
@@ -161,10 +167,18 @@ public class Contatto implements Comparable<Contatto>{
      * @param telefono1 Primo numero di telefono da impostare.
      */
     public void setTelefono1(String telefono1) {
+        if (telefono1 == null) {
+            this.telefono1 = null;
+            return;
+        }
+        if (telefono1.trim().isEmpty()) {
+            throw new IllegalArgumentException("Il numero di telefono non può essere vuoto.");
+        }
         if (!isValidPhoneNumber(telefono1)) {
             throw new IllegalArgumentException("Telefono1 non valido. Deve contenere solo numeri e può includere un prefisso +.");
         }
         this.telefono1 = telefono1;
+
 
     }
     /**
@@ -235,6 +249,13 @@ public class Contatto implements Comparable<Contatto>{
      * @param telefono2 Secondo numero di telefono da impostare.
      */
     public void setTelefono2(String telefono2) {
+        if (telefono2 == null) {
+            this.telefono2 = null; // Accetta un valore vuoto
+            return;
+        }
+        if (telefono2.trim().isEmpty()) {
+            throw new IllegalArgumentException("Il numero di telefono non può essere vuoto.");
+        }
         if (!isValidPhoneNumber(telefono2)) {
             throw new IllegalArgumentException("Telefono2 non valido. Deve contenere solo numeri e può includere un prefisso +.");
         }
@@ -245,6 +266,13 @@ public class Contatto implements Comparable<Contatto>{
      * @param telefono3 Terzo numero di telefono da impostare.
      */
     public void setTelefono3(String telefono3) {
+        if (telefono3 == null) {
+            this.telefono3 = null; // Accetta un valore vuoto
+            return;
+        }
+        if (telefono3.trim().isEmpty()) {
+            throw new IllegalArgumentException("Il numero di telefono non può essere vuoto.");
+        }
         if (!isValidPhoneNumber(telefono3)) {
             throw new IllegalArgumentException("Telefono3 non valido. Deve contenere solo numeri e può includere un prefisso +.");
         }
@@ -255,7 +283,11 @@ public class Contatto implements Comparable<Contatto>{
      * @param email1 Prima mail del contatto da impostare.
      */
     public void setEmail1(String email1) {
-        if (email1 != null && !isValidEmail(email1)) {
+        if (email1 == null || email1.trim().isEmpty()) {
+            this.email1 = ""; // Accetta campo vuoto
+            return;
+        }
+        if (!isValidEmail(email1)) {
             throw new IllegalArgumentException("Email1 non valida.");
         }
         this.email1 = email1;
@@ -265,7 +297,11 @@ public class Contatto implements Comparable<Contatto>{
      * @param email2 Seconda mail del contatto da impostare.
      */
     public void setEmail2(String email2) {
-        if (email2 != null && !isValidEmail(email2)) {
+        if (email2 == null || email2.trim().isEmpty()) {
+            this.email2 = ""; // Accetta campo vuoto
+            return;
+        }
+        if (!isValidEmail(email2)) {
             throw new IllegalArgumentException("Email2 non valida.");
         }
         this.email2 = email2;
@@ -275,7 +311,11 @@ public class Contatto implements Comparable<Contatto>{
      * @param email3 terza mail del contatto da impostare.
      */
     public void setEmail3(String email3) {
-        if (email3 != null && !isValidEmail(email3)) {
+        if (email3 == null || email3.trim().isEmpty()) {
+            this.email3 = ""; // Accetta campo vuoto
+            return;
+        }
+        if (!isValidEmail(email3)) {
             throw new IllegalArgumentException("Email3 non valida.");
         }
         this.email3 = email3;
@@ -331,9 +371,9 @@ public class Contatto implements Comparable<Contatto>{
     @Override
     public int compareTo(Contatto other) {
         // Ordina per cognome, poi per nome
-        int comparenome = this.nome.compareToIgnoreCase(other.nome);
-        if (comparenome != 0) {
-            return comparenome;
+        int comparnome = this.nome.compareToIgnoreCase(other.nome);
+        if (comparnome != 0) {
+            return comparnome;
         }
         return this.cognome.compareToIgnoreCase(other.cognome);
     }
