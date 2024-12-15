@@ -5,14 +5,7 @@
  */
 package com.francesco.rubrica.Interface;
 
-/**
- * @file MainInterfaceController.java
- * @brief Controller per la gestione dell'interfaccia principale della rubrica.
- *
- * Questa classe gestisce l'interfaccia principale della rubrica, permettendo
- * di effettuare operazioni come ricerca, aggiunta, esportazione e importazione
- * dei contatti.
- */
+
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
