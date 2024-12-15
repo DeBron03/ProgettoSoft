@@ -13,8 +13,8 @@
             <children>
                 <HBox prefHeight="39.0" prefWidth="930.0">
                     <children>
-                        <Button fx:id="importContact" mnemonicParsing="false" text="Importa Contatto" onAction="#importaContatto"  HBox.hgrow="ALWAYS" />
-                        <Button fx:id="exportContact" mnemonicParsing="false" text="Esporta Contatto" onAction="#esportaContatto"  HBox.hgrow="ALWAYS" />
+                        <Button fx:id="importContact" mnemonicParsing="false" text="Importa Contatti" onAction="#importaContatto"  HBox.hgrow="ALWAYS" />
+                        <Button fx:id="exportContact" mnemonicParsing="false" text="Esporta Contatti" onAction="#esportaContatto"  HBox.hgrow="ALWAYS" />
                         <HBox prefHeight="39.0" prefWidth="329.0">
                             <children>
                                 <TextField fx:id="researchField" prefHeight="39.0" prefWidth="410.0" HBox.hgrow="ALWAYS" />
