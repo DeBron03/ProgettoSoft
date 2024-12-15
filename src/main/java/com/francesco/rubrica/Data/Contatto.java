@@ -5,9 +5,6 @@
  */
 package com.francesco.rubrica.Data;
 
-
-
-
 import java.time.LocalDate;
 
 /**
@@ -104,7 +101,7 @@ public class Contatto implements Comparable<Contatto>{
     }
 
 
-    public static boolean isValidEmail(String email) {
+    public static boolean emailValida(String email) {
 
 
         if (email == null || email.trim().isEmpty()) {
@@ -114,7 +111,7 @@ public class Contatto implements Comparable<Contatto>{
         return email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
     }
 
-    public static boolean isValidPhoneNumber(String telefono) {
+    public static boolean numeroValido(String telefono) {
 
         if (telefono == null || telefono.trim().isEmpty()) {
             return true;
@@ -147,33 +144,33 @@ public class Contatto implements Comparable<Contatto>{
             this.nome = nome;
             this.cognome = cognome;
         }
-        if (isValidPhoneNumber(telefono1)) {
+        if (numeroValido(telefono1)) {
             this.telefono1 = telefono1;
         } else {
         this.telefono1 = "";
         }
 
-        if (isValidPhoneNumber(telefono2)) {
+        if (numeroValido(telefono2)) {
             this.telefono2 = telefono2;
         } else {
            this.telefono2 = "";
         }
-        if (isValidPhoneNumber(telefono3)) {
+        if (numeroValido(telefono3)) {
             this.telefono3 = telefono3;
         } else {
             this.telefono3 = "";
         }
-        if (isValidEmail(email1)) {
+        if (emailValida(email1)) {
             this.email1 = email1;
         } else {
             this.email1 = "";
         }
-        if (isValidEmail(email2)) {
+        if (emailValida(email2)) {
             this.email2 = email2;
         } else {
             this.email2 = "";
         }
-        if (isValidEmail(email3)) {
+        if (emailValida(email3)) {
             this.email3 = email3;
         } else {
             this.email3 = "";
@@ -265,7 +262,7 @@ public class Contatto implements Comparable<Contatto>{
      * @param telefono1 Primo numero di telefono da impostare.
      */
     public void setTelefono1(String telefono1) {
-        if (!Contatto.isValidPhoneNumber(telefono1)) {
+        if (!Contatto.numeroValido(telefono1)) {
             throw new IllegalArgumentException("Telefono1 non valido. Deve contenere solo numeri e può includere un prefisso +.");
         }
         this.telefono1 = telefono1;
@@ -276,7 +273,7 @@ public class Contatto implements Comparable<Contatto>{
      * @param telefono2 Secondo numero di telefono da impostare.
      */
     public void setTelefono2(String telefono2) {
-        if (!Contatto.isValidPhoneNumber(telefono2)) {
+        if (!Contatto.numeroValido(telefono2)) {
             throw new IllegalArgumentException("Telefono2 non valido. Deve contenere solo numeri e può includere un prefisso +.");
         }
         this.telefono2 = telefono2;
@@ -286,7 +283,7 @@ public class Contatto implements Comparable<Contatto>{
      * @param telefono3 Terzo numero di telefono da impostare.
      */
     public void setTelefono3(String telefono3) {
-        if (!Contatto.isValidPhoneNumber(telefono3)) {
+        if (!Contatto.numeroValido(telefono3)) {
             throw new IllegalArgumentException("Telefono3 non valido. Deve contenere solo numeri e può includere un prefisso +.");
         }
         this.telefono3 = telefono3;
@@ -304,7 +301,7 @@ public class Contatto implements Comparable<Contatto>{
             this.email1 = "";
             return;
         }
-        if (!isValidEmail(email1)) {
+        if (!emailValida(email1)) {
             throw new IllegalArgumentException("Email1 non valida.");
         }
         this.email1 = email1;
@@ -322,7 +319,7 @@ public class Contatto implements Comparable<Contatto>{
             this.email2 = "";
             return;
         }
-        if (!isValidEmail(email2)) {
+        if (!emailValida(email2)) {
             throw new IllegalArgumentException("Email2 non valida.");
         }
         this.email2 = email2;
@@ -340,7 +337,7 @@ public class Contatto implements Comparable<Contatto>{
             this.email3 = "";
             return;
         }
-        if (!isValidEmail(email3)) {
+        if (!emailValida(email3)) {
             throw new IllegalArgumentException("Email3 non valida.");
         }
         this.email3 = email3;

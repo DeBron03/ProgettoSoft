@@ -8,37 +8,37 @@ import static org.junit.jupiter.api.Assertions.*;
 class ContattoTest {
 
     @Test
-    void testIsValidEmailWithValidEmail() {
-        assertTrue(Contatto.isValidEmail("test@example.com"), "L'email 'test@example.com' dovrebbe essere valida.");
-        assertTrue(Contatto.isValidEmail("user.name+tag+sorting@example.com"), "L'email 'user.name+tag+sorting@example.com' dovrebbe essere valida.");
-        assertTrue(Contatto.isValidEmail("email@subdomain.example.com"), "L'email 'email@subdomain.example.com' dovrebbe essere valida.");
+    void testemailValidaEmailWithValidEmail() {
+        assertTrue(Contatto.emailValida("test@example.com"), "L'email 'test@example.com' dovrebbe essere valida.");
+        assertTrue(Contatto.emailValida("user.name+tag+sorting@example.com"), "L'email 'user.name+tag+sorting@example.com' dovrebbe essere valida.");
+        assertTrue(Contatto.emailValida("email@subdomain.example.com"), "L'email 'email@subdomain.example.com' dovrebbe essere valida.");
     }
 
     @Test
-    void testIsValidEmailWithInvalidEmailMissingDomain() {
-        assertFalse(Contatto.isValidEmail("test@"), "L'email 'test@' dovrebbe essere invalida.");
+    void testemailValidaWithInvalidEmailMissingDomain() {
+        assertFalse(Contatto.emailValida("test@"), "L'email 'test@' dovrebbe essere invalida.");
     }
 
     @Test
-    void testIsValidEmailWithInvalidEmailMissingAtSymbol() {
-        assertFalse(Contatto.isValidEmail("testexample.com"), "L'email 'testexample.com' dovrebbe essere invalida.");
+    void testemailValidaWithInvalidEmailMissingAtSymbol() {
+        assertFalse(Contatto.emailValida("testexample.com"), "L'email 'testexample.com' dovrebbe essere invalida.");
     }
 
     @Test
-    void testIsValidEmailWithNullEmail() {
-        assertTrue(Contatto.isValidEmail(null), "Un'email nulla dovrebbe essere valida.");
+    void testemailValidalWithNullEmail() {
+        assertTrue(Contatto.emailValida(null), "Un'email nulla dovrebbe essere valida.");
     }
 
     @Test
-    void testIsValidEmailWithEmptyEmail() {
-        assertTrue(Contatto.isValidEmail(""), "Un'email vuota dovrebbe essere valida.");
-        assertTrue(Contatto.isValidEmail("   "), "Un'email con solo spazi vuoti dovrebbe essere valida.");
+    void testemailValidalWithEmptyEmail() {
+        assertTrue(Contatto.emailValida(""), "Un'email vuota dovrebbe essere valida.");
+        assertTrue(Contatto.emailValida("   "), "Un'email con solo spazi vuoti dovrebbe essere valida.");
     }
 
     @Test
-    void testIsValidEmailWithInvalidEmailContainsSpace() {
-        assertFalse(Contatto.isValidEmail("test @example.com"), "L'email 'test @example.com' dovrebbe essere invalida.");
-        assertFalse(Contatto.isValidEmail("test@ example.com"), "L'email 'test@ example.com' dovrebbe essere invalida.");
+    void testemailValidalWithInvalidEmailContainsSpace() {
+        assertFalse(Contatto.emailValida("test @example.com"), "L'email 'test @example.com' dovrebbe essere invalida.");
+        assertFalse(Contatto.emailValida("test@ example.com"), "L'email 'test@ example.com' dovrebbe essere invalida.");
     }
 
     /**
@@ -70,8 +70,8 @@ class ContattoTest {
         Contatto contatto = new Contatto("franco","gioia");
 
 
-        assertTrue(Contatto.isValidPhoneNumber(""));
-        assertTrue(Contatto.isValidPhoneNumber("  "));
+        assertTrue(Contatto.numeroValido(""));
+        assertTrue(Contatto.numeroValido("  "));
     }
 
 

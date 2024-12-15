@@ -22,8 +22,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
-import static com.francesco.rubrica.Data.Contatto.isValidEmail;
-import static com.francesco.rubrica.Data.Contatto.isValidPhoneNumber;
+import static com.francesco.rubrica.Data.Contatto.*;
 
 
 /**
@@ -211,9 +210,9 @@ public class ModificaContattoController implements Initializable {
             alert.showAndWait();
             return; }
 
-        if (!isValidPhoneNumber(numberField1.getText().trim()) ||
-                !isValidPhoneNumber(numberField2.getText().trim()) ||
-                !isValidPhoneNumber(numberField3.getText().trim())) {
+        if (!numeroValido(numberField1.getText().trim()) ||
+                !numeroValido(numberField2.getText().trim()) ||
+                !numeroValido(numberField3.getText().trim())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Errore");
             alert.setHeaderText("Numero di telefono non valido");
@@ -222,9 +221,9 @@ public class ModificaContattoController implements Initializable {
             return;
         }
 
-        if (!isValidEmail(emailField1.getText().trim()) ||
-                !isValidEmail(emailField2.getText().trim()) ||
-                !isValidEmail(emailField3.getText().trim())) {
+        if (!emailValida(emailField1.getText().trim()) ||
+                !emailValida(emailField2.getText().trim()) ||
+                !emailValida(emailField3.getText().trim())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Errore");
             alert.setHeaderText("Email non valida");

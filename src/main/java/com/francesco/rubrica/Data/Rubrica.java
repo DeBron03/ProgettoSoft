@@ -5,10 +5,6 @@
  */
 package com.francesco.rubrica.Data;
 
-
-
-
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.io.*;
