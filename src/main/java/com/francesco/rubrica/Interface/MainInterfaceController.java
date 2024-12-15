@@ -103,7 +103,7 @@ public class MainInterfaceController implements Initializable {
         rubrica.setItems(FXCollections.observableArrayList(App.getRubricaCondivisa().getContatti()));
         nameClm.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getNome()));
         surnameClm.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getCognome()));
-        setupTableDoubleClickListener();
+        setupDoppioClick();
     }
 
     /**
@@ -130,8 +130,8 @@ public class MainInterfaceController implements Initializable {
      * @brief Imposta un listener per il doppio clic nella tabella.
      * @post Si abilita la selezione di un contatto per visualizzarne i dettagli.
      */
-    private void setupTableDoubleClickListener() {
-        rubrica.setOnMouseClicked(new tableClick());
+    private void setupDoppioClick() {
+        rubrica.setOnMouseClicked(new Doppioclick());
     }
 
     /**
@@ -208,7 +208,7 @@ public class MainInterfaceController implements Initializable {
      * @post Si apre l'interfaccia "VisualizzaSingoloContatto.Interface.fxml"
      * @see VisualizzaSingoloContattoController
      */
-    private class tableClick implements javafx.event.EventHandler<javafx.scene.input.MouseEvent> {
+    private class Doppioclick implements javafx.event.EventHandler<javafx.scene.input.MouseEvent> {
         @Override
         public void handle(javafx.scene.input.MouseEvent event) {
             if (event.getClickCount() == 2) {
