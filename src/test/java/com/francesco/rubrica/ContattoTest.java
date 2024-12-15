@@ -41,13 +41,6 @@ class ContattoTest {
         assertFalse(Contatto.emailValida("test@ example.com"), "L'email 'test@ example.com' dovrebbe essere invalida.");
     }
 
-    /**
-     * The Contatto class represents a contact entity which includes several details
-     * like name, phone numbers, emails, company, address, and birthday. The method
-     * being tested, setTelefono1, is used to update the first telephone number of a contact
-     * and validates the phone number to ensure it meets the required format.
-     */
-
     @Test
     void testSetTelefonoWithValidPhoneNumber() {
 
