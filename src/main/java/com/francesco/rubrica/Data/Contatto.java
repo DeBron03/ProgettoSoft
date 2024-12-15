@@ -105,11 +105,21 @@ public class Contatto implements Comparable<Contatto>{
 
 
     public static boolean isValidEmail(String email) {
-        return  email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$") || email == null || email.trim().isEmpty();
+        //return  email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")  || email.trim().isEmpty();
+
+        if (email == null || email.trim().isEmpty()) {
+            return true;
+        }
+        // Valida l'email con una regex
+        return email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
     }
 
     public static boolean isValidPhoneNumber(String telefono) {
-        return telefono.matches("^\\+?[0-9]{10,15}$")|| telefono == null || telefono.trim().isEmpty();
+        // Se il numero è nullo o vuoto
+        if (telefono == null || telefono.trim().isEmpty()) {
+            return true; // Considera i numeri null o vuoti come validi
+        }
+        return (telefono.matches("^\\+?[0-9]{10,15}$"));
     }
 
     /**
@@ -140,13 +150,13 @@ public class Contatto implements Comparable<Contatto>{
         if (isValidPhoneNumber(telefono1)) {
             this.telefono1 = telefono1;
         } else {
-            this.telefono1 = "";
+        this.telefono1 = "";
         }
 
         if (isValidPhoneNumber(telefono2)) {
             this.telefono2 = telefono2;
         } else {
-            this.telefono2 = "";
+           this.telefono2 = "";
         }
         if (isValidPhoneNumber(telefono3)) {
             this.telefono3 = telefono3;
@@ -255,6 +265,9 @@ public class Contatto implements Comparable<Contatto>{
      * @param telefono1 Primo numero di telefono da impostare.
      */
     public void setTelefono1(String telefono1) {
+        if (!Contatto.isValidPhoneNumber(telefono1)) {
+            throw new IllegalArgumentException("Telefono1 non valido. Deve contenere solo numeri e può includere un prefisso +.");
+        }
         this.telefono1 = telefono1;
     }
 
@@ -263,6 +276,9 @@ public class Contatto implements Comparable<Contatto>{
      * @param telefono2 Secondo numero di telefono da impostare.
      */
     public void setTelefono2(String telefono2) {
+        if (!Contatto.isValidPhoneNumber(telefono2)) {
+            throw new IllegalArgumentException("Telefono2 non valido. Deve contenere solo numeri e può includere un prefisso +.");
+        }
         this.telefono2 = telefono2;
     }
     /**
@@ -270,6 +286,9 @@ public class Contatto implements Comparable<Contatto>{
      * @param telefono3 Terzo numero di telefono da impostare.
      */
     public void setTelefono3(String telefono3) {
+        if (!Contatto.isValidPhoneNumber(telefono3)) {
+            throw new IllegalArgumentException("Telefono3 non valido. Deve contenere solo numeri e può includere un prefisso +.");
+        }
         this.telefono3 = telefono3;
     }
     /**
@@ -277,7 +296,11 @@ public class Contatto implements Comparable<Contatto>{
      * @param email1 Prima mail del contatto da impostare.
      */
     public void setEmail1(String email1) {
-        if (email1 == null || email1.trim().isEmpty()) {
+        if (email1 == null) {
+            this.email1 = null;
+            return;
+        }
+        if  (email1.trim().isEmpty()) {
             this.email1 = "";
             return;
         }
@@ -291,7 +314,11 @@ public class Contatto implements Comparable<Contatto>{
      * @param email2 Seconda mail del contatto da impostare.
      */
     public void setEmail2(String email2) {
-        if (email2 == null || email2.trim().isEmpty()) {
+        if (email2 == null) {
+            this.email2 = null;
+            return;
+        }
+        if (email2.trim().isEmpty()) {
             this.email2 = "";
             return;
         }
@@ -305,7 +332,11 @@ public class Contatto implements Comparable<Contatto>{
      * @param email3 terza mail del contatto da impostare.
      */
     public void setEmail3(String email3) {
-        if (email3 == null || email3.trim().isEmpty()) {
+        if (email3 == null) {
+            this.email3 = null;
+            return;
+        }
+        if (email3.trim().isEmpty()) {
             this.email3 = "";
             return;
         }
