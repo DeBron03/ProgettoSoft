@@ -6,10 +6,10 @@
 package com.francesco.rubrica.Interface;
 
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import com.francesco.rubrica.Main.App;
 import com.francesco.rubrica.Data.*;
 import javafx.fxml.FXML;
@@ -22,6 +22,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
+
 import static com.francesco.rubrica.Data.Contatto.*;
 
 
@@ -126,9 +127,9 @@ public class ModificaContattoController implements Initializable {
 
 
     /**
-     * @brief Inizializza il Controller.
      * @param url URL per l'inizializzazione del Controller.
-     * @param rb ResourceBundle per la localizzazione.
+     * @param rb  ResourceBundle per la localizzazione.
+     * @brief Inizializza il Controller.
      * @invariant Dopo l'inizializzazione, tutti i campi FXML devono essere non null.
      * Questo metodo viene chiamato automaticamente per inizializzare i componenti
      * FXML al caricamento della scena.
@@ -139,8 +140,8 @@ public class ModificaContattoController implements Initializable {
     }
 
     /**
-     * @brief Imposta il contatto da modificare nei campi di input.
      * @param contatto Il contatto da modificare.
+     * @brief Imposta il contatto da modificare nei campi di input.
      * @post I campi di input vengono popolati con i dati del contatto selezionato.
      */
     public void setContatto(Contatto contatto) {
@@ -160,9 +161,9 @@ public class ModificaContattoController implements Initializable {
 
 
     /**
-     * @brief Annulla la modifica del contatto.
      * @param event L'evento che ha scatenato l'azione(Il tasto "annulla").
-     *  @pre L'utente deve aver eseguito l'operazione di modifica.
+     * @brief Annulla la modifica del contatto.
+     * @pre L'utente deve aver eseguito l'operazione di modifica.
      * @post L'utente torna alla visualizzazione precedente senza salvare le modifiche apportate.
      * Metodo che gestisce la logica per annullare le modifiche apportate ai dettagli
      * di un contatto e torna alla visualizzazione precedente.
@@ -180,19 +181,19 @@ public class ModificaContattoController implements Initializable {
             VisualizzaSingoloContattoController controller = loader.getController();
             controller.setContatto(contatto);
         } catch (IOException e) {
-           System.out.println("Impossibile annullare l'operazione corrente");
+            System.out.println("Impossibile annullare l'operazione corrente");
         }
     }
 
     /**
-     * @brief Salva le modifiche apportate al contatto.
      * @param event L'evento che ha scatenato l'azione(Il tasto "Salva Modifiche").
-     * @pre  L'utente seleziona un contatto nella rubrica, clicca il tasto modifica e visualizza le informazioni del contatto.
+     * @brief Salva le modifiche apportate al contatto.
+     * @pre L'utente seleziona un contatto nella rubrica, clicca il tasto modifica e visualizza le informazioni del contatto.
      * @post Il contatto modificato è salvato nella rubrica e la lista grafica viene aggiornata.
      * Metodo che gestisce la logica per salvare le modifiche apportate ai dettagli
      * di un contatto esistente.
      * @invariant Dopo l'esecuzione, i campi grafici e la rubrica devono essere sincronizzati.
-     * @see Rubrica#modificaContatto(Contatto vecchio,Contatto nuovocontatto)
+     * @see Rubrica#modificaContatto(Contatto vecchio, Contatto nuovocontatto)
      */
     @FXML
     private void modificaContatto(ActionEvent event) {
@@ -202,13 +203,14 @@ public class ModificaContattoController implements Initializable {
         }
 
         if ((nameField.getText().trim() == null || nameField.getText().trim().isEmpty()) &&
-                (surnameField.getText().trim() == null || surnameField.getText().trim().isEmpty())){
+                (surnameField.getText().trim() == null || surnameField.getText().trim().isEmpty())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Errore");
             alert.setHeaderText("Nome o cognome non inseriti");
             alert.setContentText("Inserisci almeno un nome o un cognome.");
             alert.showAndWait();
-            return; }
+            return;
+        }
 
         if (!numeroValido(numberField1.getText().trim()) ||
                 !numeroValido(numberField2.getText().trim()) ||
@@ -231,7 +233,7 @@ public class ModificaContattoController implements Initializable {
             alert.showAndWait();
             return;
         }
-        Contatto nuovocontatto= new Contatto(
+        Contatto nuovocontatto = new Contatto(
                 nameField.getText().trim(),
                 surnameField.getText().trim(),
                 numberField1.getText().trim(),
@@ -245,10 +247,10 @@ public class ModificaContattoController implements Initializable {
                 birthdayField.getValue()
         );
         if (App.getRubricaCondivisa() != null) {
-                  App.getRubricaCondivisa().modificaContatto(contatto, nuovocontatto);
-              } else {
-                  System.out.println("Rubrica condivisa non trovata.");
-              }
+            App.getRubricaCondivisa().modificaContatto(contatto, nuovocontatto);
+        } else {
+            System.out.println("Rubrica condivisa non trovata.");
+        }
 
         try {
 
@@ -260,7 +262,7 @@ public class ModificaContattoController implements Initializable {
             VisualizzaSingoloContattoController controller = loader.getController();
             controller.setContatto(nuovocontatto);
         } catch (IOException e) {
-           System.out.println("Impossibile tornare alla interfaccia VisualizzaSingoloContatto.");
+            System.out.println("Impossibile tornare alla interfaccia VisualizzaSingoloContatto.");
         }
     }
 }

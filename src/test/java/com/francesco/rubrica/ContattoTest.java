@@ -60,7 +60,7 @@ class ContattoTest {
 
     @Test
     public void testSetTelefono1WithEmptyPhoneNumber() {
-        Contatto contatto = new Contatto("franco","gioia");
+        Contatto contatto = new Contatto("franco", "gioia");
 
 
         assertTrue(Contatto.numeroValido(""));
@@ -144,6 +144,7 @@ class ContattoTest {
                 contatto.setTelefono3(invalidPhoneNumber), "Inserire un numero troppo lungo dovrebbe lanciare un'eccezione.");
         assertEquals("Telefono3 non valido. Deve contenere solo numeri e può includere un prefisso +.", exception3.getMessage());
     }
+
     @Test
     void testSetEmailWithInvalidEmail() {
 
@@ -163,6 +164,7 @@ class ContattoTest {
                 contatto.setEmail3(invalidEmail), "Inserire un'email senza dominio dovrebbe lanciare un'eccezione.");
         assertEquals("Email3 non valida.", exception3.getMessage());
     }
+
     @Test
     void testSetEmailWithNullEmail() {
 
@@ -179,6 +181,7 @@ class ContattoTest {
         assertNull(contatto.getEmail2(), "Email2 dovrebbe essere null dopo l'impostazione su null.");
         assertNull(contatto.getEmail3(), "Email3 dovrebbe essere null dopo l'impostazione su null.");
     }
+
     @Test
     void testSetEmailWithValidEmail() {
 

@@ -7,6 +7,7 @@ package com.francesco.rubrica.Data;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -36,13 +37,13 @@ public class Rubrica {
      * @brief Costruttore per inizializzare una rubrica vuota.
      * @post La lista dei contatti è inizializzata e vuota.
      */
-    public Rubrica(){
+    public Rubrica() {
         this.contatti = FXCollections.observableArrayList();
     }
 
     /**
-     * @brief Restituisce la lista dei contatti.
      * @return La lista osservabile dei contatti.
+     * @brief Restituisce la lista dei contatti.
      */
     public ObservableList<Contatto> getContatti() {
         return contatti;
@@ -50,10 +51,10 @@ public class Rubrica {
 
 
     /**
+     * @param contatto Il contatto da aggiungere.
      * @brief Aggiunge un nuovo contatto alla rubrica.
      * @pre Il contatto non deve essere null.
      * @post Il contatto è aggiunto alla lista dei contatti se è valido.
-     * @param contatto Il contatto da aggiungere.
      * @invariant Il contatto aggiunto deve essere valido (nome o cognome presenti).
      */
     public void aggiungiContatto(Contatto contatto) {
@@ -64,17 +65,17 @@ public class Rubrica {
     }
 
     /**
-     * @brief Cerca i contatti nella rubrica in base a una stringa.
      * @param s Stringa con cui ricercare corrispondenze nella Lista.
+     * @return Una lista di contatti che corrispondono ai criteri di ricerca.
+     * @brief Cerca i contatti nella rubrica in base a una stringa.
      * @pre La stringa di ricerca può essere null o vuota (in tal caso restituisce tutti i contatti).
      * @post Restituisce una lista filtrata dei contatti che corrispondono ai criteri di ricerca.
-     * @return Una lista di contatti che corrispondono ai criteri di ricerca.
      */
     public ObservableList<Contatto> ricercaContatto(String s) {
         if (s == null || s.isEmpty()) {
             return contatti;
         }
-        ObservableList<Contatto> risultati= FXCollections.observableArrayList();
+        ObservableList<Contatto> risultati = FXCollections.observableArrayList();
         for (Contatto contatto : contatti) {
             if (contatto.getNome().toLowerCase().startsWith(s.toLowerCase()) ||
                     contatto.getCognome().toLowerCase().startsWith(s.toLowerCase())) {
@@ -85,11 +86,11 @@ public class Rubrica {
     }
 
     /**
+     * @param filename Il nome del file in cui esportare i contatti.
+     * @throws IOException Se si verifica un errore durante l'esportazione.
      * @brief Esporta i contatti della rubrica in un file CSV.
      * @pre La lista dei contatti può essere sia vuota che occupata da contatti.
      * @post Il file specificato contiene i contatti esportati.
-     * @param filename Il nome del file in cui esportare i contatti.
-     * @throws IOException Se si verifica un errore durante l'esportazione.
      */
     public void esportaContatto(String filename) throws IOException {
 
@@ -118,11 +119,11 @@ public class Rubrica {
     }
 
     /**
+     * @param filename Il nome del file da cui importare i contatti.
+     * @throws IOException Se si verifica un errore durante l'importazione.
      * @brief Importa contatti da un file CSV.
      * @pre Il file deve esistere e seguire il formato corretto.
      * @post I contatti validi sono aggiunti alla rubrica.
-     * @param filename Il nome del file da cui importare i contatti.
-     * @throws IOException Se si verifica un errore durante l'importazione.
      */
     public void importaContatto(String filename) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
@@ -150,7 +151,7 @@ public class Rubrica {
                 String telefono1 = fields[2].trim().isEmpty() ? " " : fields[2].trim();
                 String telefono2 = fields[3].trim().isEmpty() ? " " : fields[3].trim();
                 String telefono3 = fields[4].trim().isEmpty() ? " " : fields[4].trim();
-                String email1 = fields[5].trim().isEmpty() ?    " " : fields[5].trim();
+                String email1 = fields[5].trim().isEmpty() ? " " : fields[5].trim();
                 String email2 = fields[6].trim().isEmpty() ? " " : fields[6].trim();
                 String email3 = fields[7].trim().isEmpty() ? " " : fields[7].trim();
                 String società = fields[8].trim().isEmpty() ? " " : fields[8].trim();
@@ -185,10 +186,10 @@ public class Rubrica {
 
 
     /**
+     * @param c Il contatto da eliminare.
      * @brief Elimina un contatto dalla rubrica.
      * @pre Il contatto deve esistere nella lista.
      * @post Il contatto è rimosso dalla lista.
-     * @param c Il contatto da eliminare.
      */
     public void eliminaContatto(Contatto c) {
         contatti.remove(c);
@@ -196,23 +197,24 @@ public class Rubrica {
     }
 
     /**
+     * @param contattoOriginale Il contatto da modificare.
+     * @param nuoviDati         Il nuovo contatto con i dati aggiornati.
      * @brief Modifica un contatto esistente nella rubrica.
      * @pre Il contatto originale deve esistere nella lista.
      * @post I dettagli del contatto sono aggiornati.
-     * @param contattoOriginale Il contatto da modificare.
-     * @param nuoviDati Il nuovo contatto con i dati aggiornati.
      */
     public void modificaContatto(Contatto contattoOriginale, Contatto nuoviDati) {
         int index = contatti.indexOf(contattoOriginale);
         contatti.set(index, nuoviDati);
         System.out.println("Contatto modificato con successo alla indice" + " " + index);
     }
+
     /**
-     * @brief Ordina la lista dei contatti.
      * @param contatti La lista di contatti da ordinare.
+     * @brief Ordina la lista dei contatti.
      * @see Collections#sort(List)
      */
-    public void ordina (List<Contatto> contatti) {
+    public void ordina(List<Contatto> contatti) {
         Collections.sort(contatti);
     }
 }

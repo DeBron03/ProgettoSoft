@@ -19,10 +19,10 @@ import java.time.LocalDate;
  * azienda, indirizzo e data di compleanno.
  * @see java.time.LocalDate
  */
-public class Contatto implements Comparable<Contatto>{
+public class Contatto implements Comparable<Contatto> {
     /**
      * @brief Nome del contatto.
-     * @invariant Il nome non può essere null o vuoto. 
+     * @invariant Il nome non può essere null o vuoto.
      */
     private String nome;
 
@@ -86,11 +86,11 @@ public class Contatto implements Comparable<Contatto>{
 
 
     /**
+     * @param nome    Nome del contatto.
+     * @param cognome Cognome del contatto.
      * @brief Costruttore essenziale per creare un contatto con solo nome e cognome.
      * @pre Almeno uno tra nome e cognome deve essere fornito e non vuoto.
      * @post Crea un oggetto Contatto con nome e cognome inizializzati.
-     * @param nome Nome del contatto.
-     * @param cognome Cognome del contatto.
      */
     public Contatto(String nome, String cognome) {
         if ((nome == null || nome.isEmpty()) && (cognome == null || cognome.isEmpty())) {
@@ -120,40 +120,40 @@ public class Contatto implements Comparable<Contatto>{
     }
 
     /**
+     * @param nome       Nome del contatto.
+     * @param cognome    Cognome del contatto.
+     * @param telefono1  Primo numero di telefono.
+     * @param telefono2  Secondo numero di telefono.
+     * @param telefono3  Terzo numero di telefono.
+     * @param email1     Prima email del contatto.
+     * @param email2     Seconda email del contatto.
+     * @param email3     Terza email del contatto.
+     * @param società    Nome dell'azienda.
+     * @param indirizzo  Indirizzo del contatto.
+     * @param compleanno Data di compleanno del contatto.
      * @brief Costruttore completo per creare un contatto con dettagli completi.
      * @pre Almeno uno tra nome e cognome deve essere fornito e non vuoto.
      * @post Crea un oggetto Contatto con tutti i campi inizializzati.
-     * @param nome Nome del contatto.
-     * @param cognome Cognome del contatto.
-     * @param telefono1 Primo numero di telefono.
-     * @param telefono2 Secondo numero di telefono.
-     * @param telefono3 Terzo numero di telefono.
-     * @param email1 Prima email del contatto.
-     * @param email2 Seconda email del contatto.
-     * @param email3 Terza email del contatto.
-     * @param società Nome dell'azienda.
-     * @param indirizzo Indirizzo del contatto.
-     * @param compleanno Data di compleanno del contatto.
      */
     public Contatto(String nome, String cognome, String telefono1, String telefono2,
                     String telefono3, String email1, String email2, String email3,
                     String società, String indirizzo, LocalDate compleanno) {
         if ((nome == null || nome.isEmpty()) && (cognome == null || cognome.isEmpty())) {
             throw new IllegalArgumentException("Almeno uno tra nome e cognome deve essere fornito.");
-        }else{
+        } else {
             this.nome = nome;
             this.cognome = cognome;
         }
         if (numeroValido(telefono1)) {
             this.telefono1 = telefono1;
         } else {
-        this.telefono1 = "";
+            this.telefono1 = "";
         }
 
         if (numeroValido(telefono2)) {
             this.telefono2 = telefono2;
         } else {
-           this.telefono2 = "";
+            this.telefono2 = "";
         }
         if (numeroValido(telefono3)) {
             this.telefono3 = telefono3;
@@ -182,72 +182,80 @@ public class Contatto implements Comparable<Contatto>{
     }
 
     /**
-     * @brief Restituisce il primo numero di telefono.
      * @return Stringa contenente il primo numero di telefono.
+     * @brief Restituisce il primo numero di telefono.
      */
     public String getTelefono1() {
         return telefono1;
     }
 
     /**
-     * @brief Restituisce il cognome del contatto.
      * @return Stringa contenente il cognome.
+     * @brief Restituisce il cognome del contatto.
      */
     public String getCognome() {
         return cognome;
     }
+
     /**
-     * @brief Restituisce il secondo numero di telefono.
      * @return Stringa contenente il secondo numero di telefono.
+     * @brief Restituisce il secondo numero di telefono.
      */
     public String getTelefono2() {
         return telefono2;
     }
+
     /**
-     * @brief Restituisce il terzo numero di telefono.
      * @return Stringa contenente il terzo numero di telefono.
+     * @brief Restituisce il terzo numero di telefono.
      */
     public String getTelefono3() {
         return telefono3;
     }
+
     /**
-     * @brief Restituisce la prima mail del contatto.
      * @return Stringa contenente la prima mail del contatto.
+     * @brief Restituisce la prima mail del contatto.
      */
     public String getEmail1() {
         return email1;
     }
+
     /**
-     * @brief Restituisce la seconda mail del contatto.
      * @return Stringa contenente la seconda mail del contatto.
+     * @brief Restituisce la seconda mail del contatto.
      */
     public String getEmail2() {
         return email2;
     }
+
     /**
-     * @brief Restituisce la tera mail del contatto.
      * @return Stringa contenente la terza mail del contatto.
+     * @brief Restituisce la tera mail del contatto.
      */
     public String getEmail3() {
         return email3;
     }
+
     /**
-     * @brief Restituisce la società del contatto.
      * @return Stringa contenente la società del contatto.
+     * @brief Restituisce la società del contatto.
      */
     public String getSocietà() {
         return società;
     }
+
     /**
-     * @brief Restituisce l'indirizzo del contatto.
      * @return Stringa contenente l'indirizzo del contatto.
+     * @brief Restituisce l'indirizzo del contatto.
      */
     public String getIndirizzo() {
         return indirizzo;
     }
+
     /**
-     * @brief Imposta il cognome del contatto.
      * @param cognome Cognome del contatto da impostare.
+     * @brief Imposta il cognome del contatto.
      */
     public void setCognome(String cognome) {
         this.cognome = cognome;
@@ -258,8 +266,8 @@ public class Contatto implements Comparable<Contatto>{
      */
 
     /**
-     * @brief Imposta il primo numero di telefono.
      * @param telefono1 Primo numero di telefono da impostare.
+     * @brief Imposta il primo numero di telefono.
      */
     public void setTelefono1(String telefono1) {
         if (!Contatto.numeroValido(telefono1)) {
@@ -269,8 +277,8 @@ public class Contatto implements Comparable<Contatto>{
     }
 
     /**
-     * @brief Imposta il secondo numero di telefono.
      * @param telefono2 Secondo numero di telefono da impostare.
+     * @brief Imposta il secondo numero di telefono.
      */
     public void setTelefono2(String telefono2) {
         if (!Contatto.numeroValido(telefono2)) {
@@ -278,9 +286,10 @@ public class Contatto implements Comparable<Contatto>{
         }
         this.telefono2 = telefono2;
     }
+
     /**
-     * @brief Imposta il terzo numero di telefono.
      * @param telefono3 Terzo numero di telefono da impostare.
+     * @brief Imposta il terzo numero di telefono.
      */
     public void setTelefono3(String telefono3) {
         if (!Contatto.numeroValido(telefono3)) {
@@ -288,16 +297,17 @@ public class Contatto implements Comparable<Contatto>{
         }
         this.telefono3 = telefono3;
     }
+
     /**
-     * @brief Imposta la prima mail del contatto.
      * @param email1 Prima mail del contatto da impostare.
+     * @brief Imposta la prima mail del contatto.
      */
     public void setEmail1(String email1) {
         if (email1 == null) {
             this.email1 = null;
             return;
         }
-        if  (email1.trim().isEmpty()) {
+        if (email1.trim().isEmpty()) {
             this.email1 = "";
             return;
         }
@@ -306,9 +316,10 @@ public class Contatto implements Comparable<Contatto>{
         }
         this.email1 = email1;
     }
+
     /**
-     * @brief Imposta la seconda mail del contatto.
      * @param email2 Seconda mail del contatto da impostare.
+     * @brief Imposta la seconda mail del contatto.
      */
     public void setEmail2(String email2) {
         if (email2 == null) {
@@ -324,9 +335,10 @@ public class Contatto implements Comparable<Contatto>{
         }
         this.email2 = email2;
     }
+
     /**
-     * @brief Imposta la terza mail del contatto.
      * @param email3 terza mail del contatto da impostare.
+     * @brief Imposta la terza mail del contatto.
      */
     public void setEmail3(String email3) {
         if (email3 == null) {
@@ -342,61 +354,64 @@ public class Contatto implements Comparable<Contatto>{
         }
         this.email3 = email3;
     }
+
     /**
-     * @brief Imposta la società del contatto.
      * @param società Società del contatto da impostare.
+     * @brief Imposta la società del contatto.
      */
     public void setSocietà(String società) {
         this.società = società;
     }
+
     /**
-     * @brief Imposta l'indirizzo del contatto.
      * @param indirizzo Indirizzo del contatto da impostare.
+     * @brief Imposta l'indirizzo del contatto.
      */
     public void setIndirizzo(String indirizzo) {
         this.indirizzo = indirizzo;
     }
+
     /**
-     * @brief Restituisce il nome del contatto.
      * @return Stringa contenente il nome.
+     * @brief Restituisce il nome del contatto.
      */
     public String getNome() {
         return nome;
     }
+
     /**
-     * @brief Imposta il nome del contatto.
      * @param nome Nome da impostare.
+     * @brief Imposta il nome del contatto.
      */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
     /**
-     * @brief Restituisce la data di compleanno.
      * @return Data di compleanno del contatto come `LocalDate`.
+     * @brief Restituisce la data di compleanno.
      */
     public LocalDate getCompleanno() {
         return compleanno;
     }
 
     /**
-     * @brief Imposta la data di compleanno del contatto.
      * @param compleanno Data di compleanno da impostare.
+     * @brief Imposta la data di compleanno del contatto.
      */
     public void setCompleanno(LocalDate compleanno) {
         this.compleanno = compleanno;
     }
 
     /**
-     * @brief Confronta due contatti per ordinamento alfabetico.
      * @param other Contatto con cui confrontare l'istanza corrente.
      * @return Un valore negativo, zero o positivo se il contatto corrente è rispettivamente
-     *         successivo, uguale o precedente rispetto a "other".
+     * successivo, uguale o precedente rispetto a "other".
+     * @brief Confronta due contatti per ordinamento alfabetico.
      * @see Comparable
      */
     @Override
     public int compareTo(Contatto other) {
-
         int comparnome = this.nome.compareToIgnoreCase(other.nome);
         if (comparnome != 0) {
             return comparnome;

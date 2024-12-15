@@ -9,6 +9,7 @@ package com.francesco.rubrica.Interface;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import com.francesco.rubrica.Main.App;
 import com.francesco.rubrica.Data.Contatto;
 import com.francesco.rubrica.Data.Rubrica;
@@ -19,7 +20,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
+
 import java.io.IOException;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
@@ -87,11 +90,10 @@ public class MainInterfaceController implements Initializable {
     private Rubrica contatti;
 
 
-
     /**
-     * @brief Inizializza il Controller dell'interfaccia.
      * @param url URL per l'inizializzazione del Controller.
-     * @param rb ResourceBundle per la localizzazione.
+     * @param rb  ResourceBundle per la localizzazione.
+     * @brief Inizializza il Controller dell'interfaccia.
      * @invariant Dopo l'inizializzazione, tutti i campi FXML devono essere non null.
      * Questo metodo viene chiamato automaticamente per inizializzare i componenti
      * FXML al caricamento della scena.
@@ -107,8 +109,8 @@ public class MainInterfaceController implements Initializable {
     }
 
     /**
-     * @brief Imposta la rubrica per il controller.
      * @param contatti Rubrica contenente i contatti.
+     * @brief Imposta la rubrica per il controller.
      * @invariant Non deve mai essere null.
      */
 
@@ -135,8 +137,8 @@ public class MainInterfaceController implements Initializable {
     }
 
     /**
-     * @brief Esporta i contatti della rubrica.
      * @param event L'evento che ha scatenato l'azione(Il tasto "Esporta Contatto").
+     * @brief Esporta i contatti della rubrica.
      * @pre La rubrica può essere sia vuota che occupata.
      * @post Viene generato un file esterno con i contatti esportati.
      * @see Rubrica#esportaContatto(String filename)
@@ -159,8 +161,8 @@ public class MainInterfaceController implements Initializable {
     }
 
     /**
-     * @brief Importa i contatti da un file esterno.
      * @param event L'evento che ha scatenato l'azione.(Il tasto "Importa Contatto")
+     * @brief Importa i contatti da un file esterno.
      * @pre L'utente ha un fle, supportato dall'app, contenente i contatti.
      * @post I contatti vengono importati correttamente e la rubrica viene aggiornata.
      * @see Rubrica#importaContatto(String filename)
@@ -182,9 +184,10 @@ public class MainInterfaceController implements Initializable {
             System.out.println("Operazione di importazione annullata.");
         }
     }
+
     /**
-     * @brief Apre la finestra per aggiungere un nuovo contatto.
      * @param event L'evento che ha scatenato l'azione(Il tasto "+").
+     * @brief Apre la finestra per aggiungere un nuovo contatto.
      * @pre L'utente ha selezionato "+" per aggiungere il contatto.
      * @post Si apre l'interfaccia per l'aggiunta di un contatto.
      * @see AggiuntaContattoController
@@ -220,7 +223,7 @@ public class MainInterfaceController implements Initializable {
                         Parent root = loader.load();
                         Scene currentScene = ((javafx.scene.Node) event.getTarget()).getScene();
                         currentScene.setRoot(root);
-                        System.out.println("Hai premuto il pulsante per visualizzare i dettagli di"+ " "+ contattoSelezionato.getNome() + " " + contattoSelezionato.getCognome() + ".");
+                        System.out.println("Hai premuto il pulsante per visualizzare i dettagli di" + " " + contattoSelezionato.getNome() + " " + contattoSelezionato.getCognome() + ".");
                         VisualizzaSingoloContattoController controller = loader.getController();
                         controller.setContatto(contattoSelezionato);
                         Stage stage = (Stage) currentScene.getWindow();

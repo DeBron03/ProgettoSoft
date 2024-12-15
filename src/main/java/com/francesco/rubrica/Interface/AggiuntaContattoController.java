@@ -8,12 +8,15 @@ package com.francesco.rubrica.Interface;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import com.francesco.rubrica.Main.App;
 import com.francesco.rubrica.Data.Contatto;
 import com.francesco.rubrica.Data.Rubrica;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+
 import java.time.LocalDate;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -22,6 +25,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+
 import static com.francesco.rubrica.Data.Contatto.*;
 
 /**
@@ -118,42 +122,44 @@ public class AggiuntaContattoController implements Initializable {
     private Rubrica rubrica;
 
     /**
-     * @brief Imposta la rubrica condivisa.
      * @param rubrica L'istanza della rubrica da impostare.
+     * @brief Imposta la rubrica condivisa.
      */
     public void setRubrica(Rubrica rubrica) {
         this.rubrica = rubrica;
     }
 
     /**
-     * @brief Inizializza il Controller.
      * @param url URL per inizializzare il Controller.
-     * @param rb ResourceBundle per localizzazione.
+     * @param rb  ResourceBundle per localizzazione.
+     * @brief Inizializza il Controller.
      * @invariant Dopo l'inizializzazione, tutti i campi FXML associati devono essere non null.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        this.rubrica=App.getRubricaCondivisa();
+        this.rubrica = App.getRubricaCondivisa();
     }
+
     /**
-     * @brief Aggiunge un nuovo contatto alla rubrica.
      * @param event L'evento che ha scatenato l'azione(Il tasto "Aggiungi").
-     * @pre  Uno tra i campi "nameField" e "surnameField" deve essere compilato. Gli altri campi possono essere vuoti.
+     * @brief Aggiunge un nuovo contatto alla rubrica.
+     * @pre Uno tra i campi "nameField" e "surnameField" deve essere compilato. Gli altri campi possono essere vuoti.
      * @post Un nuovo contatto valido è aggiunto alla rubrica.
-     * @see Rubrica#aggiungiContatto(Contatto)
      * @invariant Dopo l'esecuzione, si ritorna nella MainInterface con la rubrica aggiornata.
+     * @see Rubrica#aggiungiContatto(Contatto)
      */
 
     @FXML
     public void aggiungiContatto(ActionEvent event) {
         if ((nameField.getText().trim() == null || nameField.getText().trim().isEmpty()) &&
-                (surnameField.getText().trim() == null || surnameField.getText().trim().isEmpty())){
+                (surnameField.getText().trim() == null || surnameField.getText().trim().isEmpty())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Errore");
-        alert.setHeaderText("Nome o cognome non inseriti");
-        alert.setContentText("Inserisci almeno un nome o un cognome.");
-        alert.showAndWait();
-        return; }
+            alert.setTitle("Errore");
+            alert.setHeaderText("Nome o cognome non inseriti");
+            alert.setContentText("Inserisci almeno un nome o un cognome.");
+            alert.showAndWait();
+            return;
+        }
 
         if (!numeroValido(numberField1.getText().trim()) ||
                 !numeroValido(numberField2.getText().trim()) ||
@@ -192,7 +198,7 @@ public class AggiuntaContattoController implements Initializable {
                 nome, cognome, telefono1, telefono2, telefono3, email1, email2, email3, società, indirizzo, compleanno);
 
         App.getRubricaCondivisa().aggiungiContatto(nuovoContatto);
-        System.out.println("Hai aggiunto"+" "+ nuovoContatto.getNome() +" "+ nuovoContatto.getCognome() +" alla rubrica." );
+        System.out.println("Hai aggiunto" + " " + nuovoContatto.getNome() + " " + nuovoContatto.getCognome() + " alla rubrica.");
 
         pulisciCampi();
         try {
@@ -205,18 +211,18 @@ public class AggiuntaContattoController implements Initializable {
             mainController.setRubrica(App.getRubricaCondivisa());
 
         } catch (IOException e) {
-           System.out.println("Impossibile tornare alla MainInterface.");
+            System.out.println("Impossibile tornare alla MainInterface.");
         }
     }
 
     /**
-     * @brief Annulla l'operazione di aggiunta.
      * @param event L'evento che ha scatenato l'azione(Il tasto "Annulla").
+     * @brief Annulla l'operazione di aggiunta.
      * @pre L'utente deve essere in fase di aggiunta di un nuovo contatto.
      * @post L'interfaccia torna alla MainInterface senza salvare il nuovo contatto.
      */
     @FXML
-    public void annulla (ActionEvent event) {
+    public void annulla(ActionEvent event) {
         pulisciCampi();
         System.out.println("Annullata l'aggiunta di un nuovo contatto.Torno alla MainInterface.");
         try {
@@ -253,4 +259,4 @@ public class AggiuntaContattoController implements Initializable {
         emailField3.clear();
         addressField.clear();
     }
-    }
+}
