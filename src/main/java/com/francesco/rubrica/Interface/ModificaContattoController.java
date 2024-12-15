@@ -201,6 +201,16 @@ public class ModificaContattoController implements Initializable {
             System.out.println("Nessun contatto selezionato per la modifica.");
             return;
         }
+
+        if ((nameField.getText().trim() == null || nameField.getText().trim().isEmpty()) &&
+                (surnameField.getText().trim() == null || surnameField.getText().trim().isEmpty())){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Errore");
+            alert.setHeaderText("Nome o cognome non inseriti");
+            alert.setContentText("Inserisci almeno un nome o un cognome.");
+            alert.showAndWait();
+            return; }
+
         if (!isValidPhoneNumber(numberField1.getText().trim()) ||
                 !isValidPhoneNumber(numberField2.getText().trim()) ||
                 !isValidPhoneNumber(numberField3.getText().trim())) {
