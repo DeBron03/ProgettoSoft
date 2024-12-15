@@ -50,16 +50,16 @@ class ContattoTest {
 
     @Test
     void testSetTelefonoWithValidPhoneNumber() {
-        // Arrange
+
         Contatto contatto = new Contatto("Francesco", "Rossi");
         String validPhoneNumber = "+12345678901";
 
-        // Act
+
         contatto.setTelefono1(validPhoneNumber);
         contatto.setTelefono2(validPhoneNumber);
         contatto.setTelefono3(validPhoneNumber);
 
-        // Assert
+
         assertEquals(validPhoneNumber, contatto.getTelefono1(), "Telefono1 dovrebbe corrispondere al numero di telefono inserito.");
         assertEquals(validPhoneNumber, contatto.getTelefono2(), "Telefono2 dovrebbe corrispondere al numero di telefono inserito.");
         assertEquals(validPhoneNumber, contatto.getTelefono3(), "Telefono3 dovrebbe corrispondere al numero di telefono inserito.");
@@ -69,7 +69,7 @@ class ContattoTest {
     public void testSetTelefono1WithEmptyPhoneNumber() {
         Contatto contatto = new Contatto("franco","gioia");
 
-        // Controlla che venga lanciata un'eccezione quando il numero di telefono è vuoto
+
         assertTrue(Contatto.isValidPhoneNumber(""));
         assertTrue(Contatto.isValidPhoneNumber("  "));
     }
@@ -77,16 +77,16 @@ class ContattoTest {
 
     @Test
     void testSetTelefonoWithNullPhoneNumber() {
-        // Arrange
+
         Contatto contatto = new Contatto("Francesco", "Rossi");
         String nullPhoneNumber = null;
 
-        // Act
+
         contatto.setTelefono1(nullPhoneNumber);
         contatto.setTelefono2(nullPhoneNumber);
         contatto.setTelefono3(nullPhoneNumber);
 
-        // Assert
+
         assertNull(contatto.getTelefono1(), "Telefono1 dovrebbe essere null dopo l'impostazione su null.");
         assertNull(contatto.getTelefono2(), "Telefono2 dovrebbe essere null dopo l'impostazione su null.");
         assertNull(contatto.getTelefono3(), "Telefono3 dovrebbe essere null dopo l'impostazione su null.");
@@ -94,11 +94,11 @@ class ContattoTest {
 
     @Test
     void testSetTelefonoWithInvalidPhoneNumberContainingLetters() {
-        // Arrange
+
         Contatto contatto = new Contatto("Francesco", "Rossi");
         String invalidPhoneNumber = "123ABC456";
 
-        // Act & Assert
+
         IllegalArgumentException exception1 = assertThrows(IllegalArgumentException.class, () ->
                 contatto.setTelefono1(invalidPhoneNumber), "Inserire un numero con lettere dovrebbe lanciare un'eccezione.");
         assertEquals("Telefono1 non valido. Deve contenere solo numeri e può includere un prefisso +.", exception1.getMessage());
@@ -114,11 +114,11 @@ class ContattoTest {
 
     @Test
     void testSetTelefonoWithInvalidPhoneNumberTooShort() {
-        // Arrange
+
         Contatto contatto = new Contatto("Francesco", "Rossi");
         String invalidPhoneNumber = "12345";
 
-        // Act & Assert
+
         IllegalArgumentException exception1 = assertThrows(IllegalArgumentException.class, () ->
                 contatto.setTelefono1(invalidPhoneNumber), "Inserire un numero troppo breve dovrebbe lanciare un'eccezione.");
         assertEquals("Telefono1 non valido. Deve contenere solo numeri e può includere un prefisso +.", exception1.getMessage());
@@ -134,11 +134,11 @@ class ContattoTest {
 
     @Test
     void testSetTelefonoWithInvalidPhoneNumberTooLong() {
-        // Arrange
-        Contatto contatto = new Contatto("Francesco", "Rossi");
-        String invalidPhoneNumber = "+12345678901234567890"; // More than 15 digits
 
-        // Act & Assert
+        Contatto contatto = new Contatto("Francesco", "Rossi");
+        String invalidPhoneNumber = "+12345678901234567890";
+
+
         IllegalArgumentException exception1 = assertThrows(IllegalArgumentException.class, () ->
                 contatto.setTelefono1(invalidPhoneNumber), "Inserire un numero troppo lungo dovrebbe lanciare un'eccezione.");
         assertEquals("Telefono1 non valido. Deve contenere solo numeri e può includere un prefisso +.", exception1.getMessage());
@@ -153,11 +153,11 @@ class ContattoTest {
     }
     @Test
     void testSetEmailWithInvalidEmail() {
-        // Arrange
+
         Contatto contatto = new Contatto("Francesco", "Rossi");
         String invalidEmail = "test@";
 
-        // Act & Assert
+
         IllegalArgumentException exception1 = assertThrows(IllegalArgumentException.class, () ->
                 contatto.setEmail1(invalidEmail), "Inserire un'email senza dominio dovrebbe lanciare un'eccezione.");
         assertEquals("Email1 non valida.", exception1.getMessage());
@@ -172,32 +172,32 @@ class ContattoTest {
     }
     @Test
     void testSetEmailWithNullEmail() {
-        // Arrange
+
         Contatto contatto = new Contatto("Francesco", "Rossi");
         String nullEmail = null;
 
-        // Act
+
         contatto.setEmail1(nullEmail);
         contatto.setEmail2(nullEmail);
         contatto.setEmail3(nullEmail);
 
-        // Assert
+
         assertNull(contatto.getEmail1(), "Email1 dovrebbe essere null dopo l'impostazione su null.");
         assertNull(contatto.getEmail2(), "Email2 dovrebbe essere null dopo l'impostazione su null.");
         assertNull(contatto.getEmail3(), "Email3 dovrebbe essere null dopo l'impostazione su null.");
     }
     @Test
     void testSetEmailWithValidEmail() {
-        // Arrange
+
         Contatto contatto = new Contatto("Francesco", "Rossi");
         String validEmail = "test@example.com";
 
-        // Act
+
         contatto.setEmail1(validEmail);
         contatto.setEmail2(validEmail);
         contatto.setEmail3(validEmail);
 
-        // Assert
+
         assertEquals(validEmail, contatto.getEmail1(), "Email1 dovrebbe corrispondere all'email inserita.");
         assertEquals(validEmail, contatto.getEmail2(), "Email2 dovrebbe corrispondere all'email inserita.");
         assertEquals(validEmail, contatto.getEmail3(), "Email3 dovrebbe corrispondere all'email inserita.");

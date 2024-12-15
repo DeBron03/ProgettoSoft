@@ -105,19 +105,19 @@ public class Contatto implements Comparable<Contatto>{
 
 
     public static boolean isValidEmail(String email) {
-        //return  email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")  || email.trim().isEmpty();
+
 
         if (email == null || email.trim().isEmpty()) {
             return true;
         }
-        // Valida l'email con una regex
+
         return email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$");
     }
 
     public static boolean isValidPhoneNumber(String telefono) {
-        // Se il numero è nullo o vuoto
+
         if (telefono == null || telefono.trim().isEmpty()) {
-            return true; // Considera i numeri null o vuoti come validi
+            return true;
         }
         return (telefono.matches("^\\+?[0-9]{10,15}$"));
     }
